@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core@4.22.0/dist/tf-core.min.js"
+      integrity="sha256-CSRDh4j/faV7FND3xFoF2BYRpaS1JlPabQZehtNIdXw="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="word" style="font-size: 2em; letter-spacing: 0.5em"></div>
+    <input id="guess" maxlength="1" style="width: 2em; text-align: center" />
+    <button id="btn">Guess</button>
+
+    <script type="module">
+      import * as transformers from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2/dist/transformers.min.js';
+
+      (async () => {
+        // Load pipeline first
+        const pipe = await transformers.pipeline(
+          'text-generation',
+          'Xenova/gpt2'
+        );
+
+        // Use AI to generate a 5-letter word, fallback to list if needed
+        let words = ['apple', 'train', 'house', 'snake'];
+        let secret = '';
+        for (let tries = 0; tries < 5; tries++) {
+          const prompt =
+            'Output only a random, common, real 5-letter English word:';
+          const out = await pipe(prompt, {
+            max_new_tokens: 5,
+            temperature: 1.5,
+            top_p: 0.95,
+            do_sample: true,
+          });
+          const aiText = out[0].generated_text.replace(prompt, '').trim();
+          // Remove punctuation and split by whitespace
+          const cleaned = aiText.replace(/[^a-zA-Z\s]/g, ' ').trim();
+          // Split into words and check each for length 5
+          const candidates = cleaned.split(/\s+/).filter(w => w.length === 5);
+          console.log(
+            'AI output:',
+            aiText,
+            'Cleaned:',
+            cleaned,
+            'Candidates:',
+            candidates
+          );
+          if (candidates.length > 0) {
+            const candidate = candidates.find(w => words.includes(w.toLowerCase())) || candidates[0];
+            secret = candidate.toLowerCase();
+            break;
+          }
+        }
+        // Fallback if AI fails
+        if (!secret) {
+          secret = words[Math.floor(Math.random() * words.length)];
+        }
+
+        let pattern = Array(secret.length).fill('_');
+        document.getElementById('word').textContent = pattern.join(' ');
+        // track all guesses
+        let guessedLetters = new Set();
+
+        document.getElementById('btn').onclick = async () => {
+          const g = document.getElementById('guess').value.toLowerCase();
+          document.getElementById('guess').value = '';
+          // ignore empty or repeated guesses
+          if (!g || guessedLetters.has(g)) return;
+          guessedLetters.add(g);
+
+          // apply user guess
+          pattern = pattern.map((c, i) => (secret[i] === g ? g : c));
+          document.getElementById('word').textContent = pattern.join(' ');
+          if (!pattern.includes('_')) {
+            alert('You won! Refresh to play again.');
+            return;
+          }
+
+          // AI makes a guess using the language model
+          const prompt = `You are playing Hangman. The word so far is: ${pattern.join(
+            ' '
+          )}. Letters already guessed: ${Array.from(guessedLetters).join(
+            ', '
+          )}. Guess the next most likely letter (just one letter, no explanation):`;
+
+          const out = await pipe(prompt, {
+            max_new_tokens: 1,
+            temperature: 1.2,
+          });
+          // Try to extract a single unused letter from the model's output
+          let aiGuess = out[0].generated_text
+            .replace(prompt, '')
+            .trim()
+            .toLowerCase();
+          // Only take the first unused alphabetic character
+          aiGuess =
+            (aiGuess.match(/[a-z]/) || []).find(
+              (l) => !guessedLetters.has(l)
+            ) || '';
+          if (!aiGuess) {
+            // fallback: pick a random unused letter
+            const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+            const unused = alphabet.filter((l) => !guessedLetters.has(l));
+            aiGuess = unused[Math.floor(Math.random() * unused.length)] || '';
+          }
+          if (!aiGuess) return;
+          guessedLetters.add(aiGuess);
+
+          // apply AI guess
+          pattern = pattern.map((c, i) =>
+            secret[i] === aiGuess ? aiGuess : c
+          );
+          document.getElementById('word').textContent = pattern.join(' ');
+          console.log('AI guesses:', aiGuess);
+          if (!pattern.includes('_')) {
+            alert('AI won! Refresh to play again.');
+            return;
+          }
+        };
+      })();
+    </script>
+  </body>
+</html>
