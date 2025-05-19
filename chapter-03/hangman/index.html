@@ -25,12 +25,12 @@
         // Use AI to generate a 5-letter word, fallback to list if needed
         let words = ['apple', 'train', 'house', 'snake'];
         let secret = '';
-        for (let tries = 0; tries < 5; tries++) {
+        for (let tries = 0; tries < 10; tries++) {
           const prompt =
             'Output only a random, common, real 5-letter English word:';
           const out = await pipe(prompt, {
             max_new_tokens: 5,
-            temperature: 1.5,
+            temperature: 1.2,
             top_p: 0.95,
             do_sample: true,
           });
@@ -38,7 +38,7 @@
           // Remove punctuation and split by whitespace
           const cleaned = aiText.replace(/[^a-zA-Z\s]/g, ' ').trim();
           // Split into words and check each for length 5
-          const candidates = cleaned.split(/\s+/).filter(w => w.length === 5);
+          const candidates = cleaned.split(/\s+/).filter((w) => w.length === 5);
           console.log(
             'AI output:',
             aiText,
@@ -48,7 +48,9 @@
             candidates
           );
           if (candidates.length > 0) {
-            const candidate = candidates.find(w => words.includes(w.toLowerCase())) || candidates[0];
+            const candidate =
+              candidates.find((w) => words.includes(w.toLowerCase())) ||
+              candidates[0];
             secret = candidate.toLowerCase();
             break;
           }
