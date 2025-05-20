@@ -22,15 +22,14 @@
           'Xenova/gpt2'
         );
 
-        // Use AI to generate a 5-letter word, fallback to list if needed
-        let words = ['apple', 'train', 'house', 'snake'];
+        // Use AI to generate a 5-letter word
         let secret = '';
-        for (let tries = 0; tries < 10; tries++) {
+        while (!secret) {
           const prompt =
             'Output only a random, common, real 5-letter English word:';
           const out = await pipe(prompt, {
             max_new_tokens: 5,
-            temperature: 1.2,
+            temperature: 0.9,
             top_p: 0.95,
             do_sample: true,
           });
@@ -42,22 +41,15 @@
           console.log(
             'AI output:',
             aiText,
-            'Cleaned:',
+            '\nCleaned:',
             cleaned,
-            'Candidates:',
-            candidates
+            '\nCandidates:',
+            candidates,
+            '\n'
           );
           if (candidates.length > 0) {
-            const candidate =
-              candidates.find((w) => words.includes(w.toLowerCase())) ||
-              candidates[0];
-            secret = candidate.toLowerCase();
-            break;
+            secret = candidates[0].toLowerCase();
           }
-        }
-        // Fallback if AI fails
-        if (!secret) {
-          secret = words[Math.floor(Math.random() * words.length)];
         }
 
         let pattern = Array(secret.length).fill('_');
@@ -81,24 +73,30 @@
           }
 
           // AI makes a guess using the language model
-          const prompt = `You are playing Hangman. The word so far is: ${pattern.join(
-            ' '
-          )}. Letters already guessed: ${Array.from(guessedLetters).join(
-            ', '
-          )}. Guess the next most likely letter (just one letter, no explanation):`;
+          // Use a minimal, direct prompt to avoid repeated words like "suggest"
+          const prompt = `Blanks: ${pattern.join(' ')}\nGuessed: ${Array.from(
+            guessedLetters
+          ).join(', ')}\nNext letter:`;
 
           const out = await pipe(prompt, {
             max_new_tokens: 1,
-            temperature: 1.2,
+            temperature: 1.3,
+            top_p: 0.95,
+            do_sample: true,
           });
-          // Try to extract a single unused letter from the model's output
-          let aiGuess = out[0].generated_text
+          let aiText = out[0].generated_text
             .replace(prompt, '')
             .trim()
             .toLowerCase();
-          // Only take the first unused alphabetic character
-          aiGuess =
-            (aiGuess.match(/[a-z]/) || []).find(
+          console.log(
+            'AI output:',
+            out[0].generated_text,
+            'Extracted:',
+            aiText
+          );
+          // Only take the first unused alphabetic character that is not in guessedLetters
+          let aiGuess =
+            (aiText.match(/[a-z]/g) || []).find(
               (l) => !guessedLetters.has(l)
             ) || '';
           if (!aiGuess) {
