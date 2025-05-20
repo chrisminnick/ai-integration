@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="story" style="margin-bottom: 1em"></div>
+    <div id="options"></div>
+
+    <script>
+      let session;
+      async function start() {
+        const r = await fetch('http://127.0.0.1:5000/start', {
+          method: 'POST',
+        });
+        const { session_id, text, choices } = await r.json();
+        session = session_id;
+        render(text, choices);
+      }
+
+      function render(text, choices) {
+        document.getElementById('story').textContent = text;
+        const opts = document.getElementById('options');
+        opts.innerHTML = '';
+        for (let c of choices) {
+          const btn = document.createElement('button');
+          btn.textContent = c;
+          btn.onclick = () => choose(c);
+          opts.appendChild(btn);
+        }
+      }
+
+      async function choose(choice) {
+        const r = await fetch('http://127.0.0.1:5000/choose', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ session_id: session, choice }),
+        });
+        const { text, choices } = await r.json();
+        render(text, choices);
+      }
+
+      start();
+    </script>
+  </body>
+</html>
