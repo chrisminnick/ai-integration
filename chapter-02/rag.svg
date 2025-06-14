@@ -1,0 +1,69 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <title>Retrieval-Augmented Generation (RAG) Process</title>
+ <defs>
+  <marker id="arrowhead" markerHeight="7" markerWidth="10" orient="auto" refX="9" refY="3.5">
+   <polygon fill="#34495e" id="svg_1" points="0 0, 10 3.5, 0 7"/>
+  </marker>
+ </defs>
+ <!-- Legend -->
+ <g class="layer">
+  <title>Layer 1</title>
+  <rect fill="#f8f9fa" height="600" id="svg_2" width="800" x="9" y="0"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="20" font-weight="bold" id="svg_3" text-anchor="middle" x="400" y="30">Retrieval-Augmented Generation (RAG) Process</text>
+  <rect fill="#e8f4fd" height="120" id="svg_4" rx="10" stroke="#3498db" stroke-width="2" width="700" x="50" y="60"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="14" font-weight="bold" id="svg_5" x="60" y="85">Phase 1: Document Preprocessing (Offline)</text>
+  <rect fill="#ecf0f1" height="40" id="svg_6" rx="5" stroke="#7f8c8d" width="60" x="70" y="100"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_7" text-anchor="middle" x="100" y="125">Documents</text>
+  <path d="m140,120l30,0" id="svg_8" marker-end="url(#arrowhead)" stroke="#34495e" stroke-width="2"/>
+  <rect fill="#f8c471" height="40" id="svg_9" rx="5" stroke="#e67e22" width="60" x="180" y="100"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_10" text-anchor="middle" x="210" y="120">Split into</text>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_11" text-anchor="middle" x="210" y="132">Chunks</text>
+  <path d="m250,120l30,0" id="svg_12" marker-end="url(#arrowhead)" stroke="#34495e" stroke-width="2"/>
+  <rect fill="#a9dfbf" height="40" id="svg_13" rx="5" stroke="#27ae60" width="80" x="290" y="100"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_14" text-anchor="middle" x="330" y="115">Embedding</text>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_15" text-anchor="middle" x="330" y="127">Model</text>
+  <path d="m380,120l30,0" id="svg_16" marker-end="url(#arrowhead)" stroke="#34495e" stroke-width="2"/>
+  <rect fill="#d7bde2" height="40" id="svg_17" rx="5" stroke="#8e44ad" width="60" x="420" y="100"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_18" text-anchor="middle" x="450" y="120">Vector</text>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_19" text-anchor="middle" x="450" y="132">Embeddings</text>
+  <path d="m490,120l30,0" id="svg_20" marker-end="url(#arrowhead)" stroke="#34495e" stroke-width="2"/>
+  <rect fill="#fadbd8" height="40" id="svg_21" rx="5" stroke="#e74c3c" transform="matrix(1 0 0 1 0 0)" width="80" x="530" y="100"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_22" text-anchor="middle" x="570" y="115">Vector</text>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_23" text-anchor="middle" x="570" y="127">Database</text>
+  <rect fill="#fff3cd" height="180" id="svg_24" rx="10" stroke="#ffc107" stroke-width="2" width="700" x="50" y="200"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="14" font-weight="bold" id="svg_25" x="60" y="225">Phase 2: Query Processing (Runtime)</text>
+  <rect fill="#cce5ff" height="40" id="svg_26" rx="5" stroke="#007bff" width="60" x="70" y="240"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_27" text-anchor="middle" x="100" y="260">User Query</text>
+  <path d="m140,260l30,0" id="svg_28" marker-end="url(#arrowhead)" stroke="#34495e" stroke-width="2"/>
+  <rect fill="#a9dfbf" height="40" id="svg_29" rx="5" stroke="#27ae60" transform="matrix(1 0 0 1 0 0)" width="83" x="180" y="240"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_30" text-anchor="middle" x="221" y="255">Same Embedding</text>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_31" text-anchor="middle" transform="matrix(1 0 0 1 0 0)" x="220" y="267">Model</text>
+  <path d="m270,260l30,0" id="svg_32" marker-end="url(#arrowhead)" stroke="#34495e" stroke-width="2"/>
+  <rect fill="#d7bde2" height="40" id="svg_33" rx="5" stroke="#8e44ad" transform="matrix(1 0 0 1 0 0)" width="60" x="310" y="240"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_34" text-anchor="middle" transform="matrix(1 0 0 1 0 0)" x="340" y="255">Query</text>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_35" text-anchor="middle" transform="matrix(1 0 0 1 0 0)" x="340" y="267">Vector</text>
+  <path d="m380,260l30,0" id="svg_36" marker-end="url(#arrowhead)" stroke="#34495e" stroke-width="2"/>
+  <rect fill="#ffeb3b" height="40" id="svg_37" rx="5" stroke="#ff9800" transform="matrix(1 0 0 1 0 0)" width="80" x="420" y="240"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_38" text-anchor="middle" transform="matrix(1 0 0 1 0 0)" x="460" y="255">Similarity Search</text>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_39" text-anchor="middle" transform="matrix(1 0 0 1 0 0)" x="460" y="267">vs Vector DB</text>
+  <path d="m492,240l0,-105l123,0l0,105" fill="none" id="svg_40" stroke="#e74c3c" stroke-dasharray="3,3" stroke-width="2" transform="matrix(1 0 0 1 0 0)"/>
+  <text fill="#e74c3c" font-family="Arial, sans-serif" font-size="9" id="svg_41" transform="matrix(1 0 0 1 0 0)" x="498" y="168">searches</text>
+  <path d="m510,260l30,0" id="svg_42" marker-end="url(#arrowhead)" stroke="#34495e" stroke-width="2" transform="matrix(1 0 0 1 0 0)"/>
+  <rect fill="#c8e6c9" height="40" id="svg_43" rx="5" stroke="#4caf50" width="80" x="550" y="240"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_44" text-anchor="middle" x="590" y="255">Matched</text>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_45" text-anchor="middle" x="590" y="267">Chunks</text>
+  <path d="m590,290l0,30" id="svg_46" marker-end="url(#arrowhead)" stroke="#34495e" stroke-width="2"/>
+  <rect fill="#c8e6c9" height="40" id="svg_47" rx="5" stroke="#4caf50" width="160" x="510" y="330"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_48" text-anchor="middle" x="590" y="345">Combine Matched Chunks +</text>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_49" text-anchor="middle" x="590" y="357">Original Query + Template</text>
+  <rect fill="#f3e5f5" height="120" id="svg_50" rx="10" stroke="#9c27b0" stroke-width="2" transform="matrix(1 0 0 1 0 0)" width="700" x="50" y="400"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="14" font-weight="bold" id="svg_51" x="60" y="425">Phase 3: Generation</text>
+  <path d="m590,374l0,56" id="svg_52" marker-end="url(#arrowhead)" stroke="#34495e" stroke-width="2" transform="matrix(1 0 0 1 0 0)"/>
+  <rect fill="#ffcdd2" height="40" id="svg_53" rx="5" stroke="#f44336" width="160" x="510" y="440"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="12" font-weight="bold" id="svg_54" text-anchor="middle" x="590" y="455">Large Language Model</text>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" id="svg_55" text-anchor="middle" x="590" y="470">(LLM)</text>
+  <path d="m590,486l0,38" id="svg_56" marker-end="url(#arrowhead)" stroke="#34495e" stroke-width="2" transform="matrix(1 0 0 1 0 0)"/>
+  <rect fill="#e1f5fe" height="40" id="svg_57" rx="5" stroke="#03a9f4" width="160" x="510" y="530"/>
+  <text fill="#2c3e50" font-family="Arial, sans-serif" font-size="12" font-weight="bold" id="svg_58" text-anchor="middle" x="590" y="550">Generated Response</text>
+ </g>
+</svg>
