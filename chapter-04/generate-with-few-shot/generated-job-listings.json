@@ -1,0 +1,50 @@
+[
+  {
+    "jobId": "MARK-0425",
+    "jobTitle": "Marketing Specialist",
+    "location": {
+      "city": "Austin",
+      "state": "TX",
+      "country": "USA",
+      "remoteStatus": "Hybrid"
+    },
+    "department": "Marketing & Communications",
+    "company": "Workaroo Inc.",
+    "missionStatement": "At Workaroo, we believe in building bridges between talent and opportunity through thoughtful, data-driven solutions. We celebrate diversity, encourage creativity, and aim to empower professionals everywhere.",
+    "jobSummary": "The Marketing Specialist will support campaign planning and execution, contribute to content strategy, and analyze performance data to drive engagement across multiple channels. This role is ideal for someone with a few years of experience in digital marketing who is looking to grow their career in a collaborative, mission-driven environment.",
+    "responsibilities": [
+      "Assist in the planning and execution of integrated marketing campaigns across email, social media, and paid channels",
+      "Collaborate with the content team to develop assets that support lead generation and brand awareness",
+      "Track campaign metrics, generate performance reports, and offer optimization recommendations",
+      "Coordinate webinars, trade shows, and other marketing events, including promotional support",
+      "Maintain and update marketing materials in line with brand standards",
+      "Support SEO efforts through keyword research and content recommendations"
+    ],
+    "qualifications": [
+      "Bachelor’s degree in Marketing, Communications, or related field",
+      "3–5 years of professional marketing experience, preferably in B2B or SaaS environments",
+      "Familiarity with marketing automation tools such as HubSpot or Marketo",
+      "Solid writing and editing skills for marketing communications"
+    ],
+    "skills": [
+      "Digital marketing",
+      "SEO and keyword strategy",
+      "Marketing analytics",
+      "Project coordination",
+      "Content creation",
+      "Email campaign execution",
+      "Collaboration and communication"
+    ],
+    "educationRequirements": "Bachelor's degree in Marketing, Communications, or a related discipline",
+    "experienceRequirements": "Minimum 3 years of experience in digital or content marketing",
+    "employmentType": "Full-time",
+    "salaryRange": {
+      "min": 65000,
+      "max": 82000,
+      "currency": "USD"
+    },
+    "travelRequirements": "Occasional travel to conferences and company offsites (2–4 times per year)",
+    "postedDate": "2025-07-01",
+    "applicationInstructions": "Submit your resume and cover letter via our careers page at https://careers.workaroo.com/marketing-specialist"
+  }
+]
