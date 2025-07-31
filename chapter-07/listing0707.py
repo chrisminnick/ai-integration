@@ -1,41 +1,73 @@
 from openai import OpenAI
-from dotenv import load_dotenv
+from scipy.spatial.distance import cosine
 import os
-import time
-# Load environment variables from the .env file
+from dotenv import load_dotenv
+
+# Load environment variables
 load_dotenv()
 
-# Initialize OpenAI client with API key
+# Initialize OpenAI client
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-print("--- Non-streaming Response ---")
-start_time = time.time()
-response = client.chat.completions.create(
-    model="gpt-4",
-    messages=[{"role": "user", "content": "Explain quantum computing simply."}],
-    temperature=0.7,
-    stream=False
-)
-non_streaming_time = time.time() - start_time
-print(response.choices[0].message.content)
-print(f"\nTotal time to first output: {non_streaming_time:.2f} seconds")
+# Cache with embeddings for similar prompts
+cache = []
 
-print("\n\n--- Streaming Response ---")
-start_time = time.time()
-first_chunk_time = None
+def get_embedding(text):
+    """Get embedding for text."""
+    response = client.embeddings.create(input=text, model="text-embedding-ada-002")
+    return response.data[0].embedding
 
-response = client.chat.completions.create(
-    model="gpt-4",
-    messages=[{"role": "user", "content": "Explain quantum computing simply."}],
-    temperature=0.7,
-    stream=True
-)
+def find_similar_response(prompt, threshold=0.9):
+    """Find cached response for similar prompts."""
+    prompt_embedding = get_embedding(prompt)
+    
+    for entry in cache:
+        similarity = 1 - cosine(prompt_embedding, entry["embedding"])
+        if similarity > threshold:
+            print(f"Found similar (similarity: {similarity:.3f})")
+            return entry["response"]
+    
+    return None
 
-for chunk in response:
-    if chunk.choices[0].delta.content is not None:
-        if first_chunk_time is None:
-            first_chunk_time = time.time() - start_time
-        print(chunk.choices[0].delta.content, end="", flush=True)
+def cached_completion(prompt):
+    """Get completion with embedding-based caching."""
+    # Check for similar cached responses
+    cached_response = find_similar_response(prompt)
+    if cached_response:
+        return cached_response
+    
+    # No similar response found - make API call
+    print("Making new API call...")
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=50
+    )
+    
+    result = response.choices[0].message.content
+    
+    # Cache the new response with its embedding
+    cache.append({
+        "prompt": prompt,
+        "embedding": get_embedding(prompt),
+        "response": result
+    })
+    
+    return result
 
-print(f"\n\nTime to first chunk: {first_chunk_time:.2f} seconds")
-print(f"Perceived latency improvement: {((non_streaming_time - first_chunk_time) / non_streaming_time * 100):.1f}%")
+# Demo: Similar prompts reuse responses
+print("=== EMBEDDING CACHE DEMO ===")
+
+# First prompt
+prompt1 = "What are Python's main features?"
+print(f"\n1. {prompt1}")
+response1 = cached_completion(prompt1)
+print(f"Response: {response1[:60]}...")
+
+# Similar prompt - should reuse cached response
+prompt2 = "What are the key features of Python?"
+print(f"\n2. {prompt2}")
+response2 = cached_completion(prompt2)
+print(f"Response: {response2[:60]}...")
+
+print(f"\nCache size: {len(cache)} entries")

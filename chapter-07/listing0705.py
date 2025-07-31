@@ -2,47 +2,55 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 import time
-import hashlib
-# Load environment variables from the .env file
+
+# Load environment variables
 load_dotenv()
 
-# Initialize OpenAI client with API key
+# Initialize OpenAI client
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+# Simple in-memory cache
 cache = {}
-def prompt_hash(prompt):
-    return hashlib.sha256(prompt.encode()).hexdigest()
-def fetch_answer(prompt):
-    key = prompt_hash(prompt)
-    if key in cache:
-        print("Cache hit! Returning cached response.")
-        return cache[key]
-    print("Cache miss. Calling API...")
+
+def get_cached_completion(prompt):
+    """Get completion with caching - returns response and time taken."""
+    start_time = time.time()
+    
+    # Check cache first
+    if prompt in cache:
+        print(f"Cache HIT: {time.time() - start_time:.4f}s")
+        return cache[prompt], time.time() - start_time
+    
+    # Cache miss - make API call
+    print("Cache MISS - making API call...")
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.7
+        max_tokens=50
     )
+    
     result = response.choices[0].message.content
-    cache[key] = result
-    return result
+    cache[prompt] = result  # Store in cache
+    
+    elapsed = time.time() - start_time
+    print(f"API call completed: {elapsed:.4f}s")
+    return result, elapsed
 
-# Test the caching functionality
-test_prompt = "What is the capital of France?"
+# Demo: Show caching benefits
+print("=== CACHING DEMO ===")
 
-print("First call:")
-start_time = time.time()
-answer1 = fetch_answer(test_prompt)
-print(f"Answer: {answer1}\n")
-end_time = time.time()
-print(f"Response time: {end_time - start_time:.2f} seconds\n")
+prompt = "What is the capital of France?"
 
-print("Second call (should use cache):")
-start_time = time.time()
-answer2 = fetch_answer(test_prompt)
-print(f"Answer: {answer2}\n")
-end_time = time.time()
-print(f"Response time: {end_time - start_time:.2f} seconds\n")
-print("Cache statistics:")
-print(f"Cache size: {len(cache)} entries")
+# First call - cache miss
+print("\n1st call:")
+response1, time1 = get_cached_completion(prompt)
+print(f"Response: {response1}")
 
+# Second call - cache hit  
+print("\n2nd call (same prompt):")
+response2, time2 = get_cached_completion(prompt)
+print(f"Response: {response2}")
+
+# Show the difference
+print(f"\nSpeedup: {time1/time2:.0f}x faster with cache!")
+print(f"Cache contains {len(cache)} entries")

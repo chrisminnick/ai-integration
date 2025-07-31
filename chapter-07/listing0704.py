@@ -1,17 +1,15 @@
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
+import time
 
 # Load environment variables from the .env file
 load_dotenv()
-import time
 
 # Initialize OpenAI client with API key
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 prompt = "Tell me about photosynthesis."
-
-
 
 start_time = time.time()
 response = client.chat.completions.create(model="gpt-3.5-turbo",
