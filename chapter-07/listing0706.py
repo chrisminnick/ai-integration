@@ -43,7 +43,7 @@ def get_cached_completion(prompt):
 # Demo: Show caching benefits
 print("=== CACHING DEMO ===")
 
-prompt = "What is the capital of France?"
+prompt = "Who were the members of The Beatles?"
 
 # First call - cache miss
 print("\n1st call:")

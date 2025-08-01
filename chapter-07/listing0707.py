@@ -59,13 +59,13 @@ def cached_completion(prompt):
 print("=== EMBEDDING CACHE DEMO ===")
 
 # First prompt
-prompt1 = "What are Python's main features?"
+prompt1 = "What are some good names for cats?"
 print(f"\n1. {prompt1}")
 response1 = cached_completion(prompt1)
 print(f"Response: {response1[:60]}...")
 
 # Similar prompt - should reuse cached response
-prompt2 = "What are the key features of Python?"
+prompt2 = "Give me some good names for cats."
 print(f"\n2. {prompt2}")
 response2 = cached_completion(prompt2)
 print(f"Response: {response2[:60]}...")

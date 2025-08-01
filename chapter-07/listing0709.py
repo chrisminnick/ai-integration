@@ -19,6 +19,7 @@ response = client.chat.completions.create(
 non_streaming_time = time.time() - start_time
 print(response.choices[0].message.content)
 print(f"\nTotal time to first output: {non_streaming_time:.2f} seconds")
+print(f"Total time for complete generation: {non_streaming_time:.2f} seconds")
 
 print("\n\n--- Streaming Response ---")
 start_time = time.time()
@@ -37,5 +38,7 @@ for chunk in response:
             first_chunk_time = time.time() - start_time
         print(chunk.choices[0].delta.content, end="", flush=True)
 
+streaming_total_time = time.time() - start_time
 print(f"\n\nTime to first chunk: {first_chunk_time:.2f} seconds")
+print(f"Total time for complete generation: {streaming_total_time:.2f} seconds")
 print(f"Perceived latency improvement: {((non_streaming_time - first_chunk_time) / non_streaming_time * 100):.1f}%")

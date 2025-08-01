@@ -9,7 +9,7 @@ load_dotenv()
 # Initialize OpenAI client with API key
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-compressed_prompt = "How can I reduce GPT-4 latency in production?"
+compressed_prompt = "How can I reduce GPT latency in production?"
 
 start_time = time.time()
 response = client.chat.completions.create(model="gpt-4",

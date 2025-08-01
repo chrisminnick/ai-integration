@@ -16,8 +16,8 @@ async_client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Sample prompts to process in parallel
 prompts = [
-    "Explain machine learning in one sentence.",
-    "What is the capital of Japan?",
+    "Is GIF pronouced with a hard or soft 'g'?",
+    "What is the name of the Kenny Loggins’ song from the movie, Footloose?",
     "Define artificial intelligence briefly.",
     "How does photosynthesis work in simple terms?",
     "What is the speed of light?"
