@@ -3,10 +3,8 @@ from dotenv import load_dotenv
 import os
 import time
 
-# Load environment variables from the .env file
 load_dotenv()
 
-# Initialize OpenAI client with API key
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 prompt = "Tell me about photosynthesis."

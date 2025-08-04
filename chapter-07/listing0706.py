@@ -30,7 +30,7 @@ def get_cached_completion(prompt):
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=50
+        max_tokens=256
     )
     
     result = response.choices[0].message.content
@@ -43,7 +43,7 @@ def get_cached_completion(prompt):
 # Demo: Show caching benefits
 print("=== CACHING DEMO ===")
 
-prompt = "Who were the members of The Beatles?"
+prompt = "Who were the original members of The Ramones?"
 
 # First call - cache miss
 print("\n1st call:")

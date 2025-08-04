@@ -12,7 +12,7 @@ print("--- Non-streaming Response ---")
 start_time = time.time()
 response = client.chat.completions.create(
     model="gpt-4",
-    messages=[{"role": "user", "content": "Explain quantum computing simply."}],
+    messages=[{"role": "user", "content": "Summarize the pros and cons of working a 4-day workweek."}],
     temperature=0.7,
     stream=False
 )
@@ -27,7 +27,7 @@ first_chunk_time = None
 
 response = client.chat.completions.create(
     model="gpt-4",
-    messages=[{"role": "user", "content": "Explain quantum computing simply."}],
+    messages=[{"role": "user", "content": "Summarize the pros and cons of working a 4-day workweek."}],
     temperature=0.7,
     stream=True
 )
