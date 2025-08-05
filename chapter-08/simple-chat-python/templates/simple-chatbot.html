@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Chatbot - Python/Flask</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <h1>Simple Chatbot (Python/Flask)</h1>
+    <div id="chatLog"></div>
+    <div class="input-container">
+      <input type="text" id="msgInput" placeholder="Type your message..." />
+      <button id="sendButton" onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+      function updateChatLog({ from, text }) {
+        const chatLog = document.getElementById('chatLog');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${from}`;
+        messageDiv.textContent = text;
+        chatLog.appendChild(messageDiv);
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }
+
+      async function sendMessage() {
+        const input = document.getElementById('msgInput');
+        const sendButton = document.getElementById('sendButton');
+        const message = input.value.trim();
+
+        if (!message) return;
+
+        // Disable button and input during request
+        sendButton.disabled = true;
+        input.disabled = true;
+        sendButton.textContent = 'Sending...';
+
+        try {
+          const res = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message }),
+          });
+
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+
+          const data = await res.json();
+          updateChatLog({ from: 'user', text: message });
+          updateChatLog({ from: 'bot', text: data.reply });
+
+          input.value = '';
+        } catch (error) {
+          console.error('Error:', error);
+          updateChatLog({
+            from: 'bot',
+            text: 'Sorry, I encountered an error. Please try again.',
+          });
+        } finally {
+          // Re-enable button and input
+          sendButton.disabled = false;
+          input.disabled = false;
+          sendButton.textContent = 'Send';
+          input.focus();
+        }
+      }
+
+      // Allow Enter key to send message
+      document
+        .getElementById('msgInput')
+        .addEventListener('keypress', function (e) {
+          if (e.key === 'Enter') {
+            sendMessage();
+          }
+        });
+
+      // Focus on input when page loads
+      window.onload = function () {
+        document.getElementById('msgInput').focus();
+      };
+    </script>
+  </body>
+</html>
