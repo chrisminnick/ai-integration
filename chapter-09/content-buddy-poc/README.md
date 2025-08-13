@@ -26,7 +26,7 @@ This POC focuses on **text** generation and shows a pattern you can extend to im
 
 ## Quick start
 
-1. Ensure Node 18+ is installed (global `fetch` available).
+1. Ensure Node 18+ is installed.
 2. Copy `.env.example` to `.env` and configure your provider:
    ```bash
    cp .env.example .env
@@ -87,18 +87,114 @@ Default settings are in `configs/providers.json`:
 
 ## Evaluation
 
-Run the evaluation harness against your chosen provider:
+The evaluation system allows you to test and benchmark your prompts and AI provider performance across different scenarios.
+
+### Running Evaluations
+
+**Evaluate all brief files (default):**
 
 ```bash
 node src/eval/runEvaluations.js
 ```
 
-This computes:
+**Evaluate specific brief files:**
 
-- Style violations per 1,000 words
-- Reading level band compliance
-- API latency and cost accounting (with real providers)
-- Quality metrics across different prompt templates
+```bash
+# Single file
+node src/eval/runEvaluations.js brief1.json
+
+# Multiple files
+node src/eval/runEvaluations.js brief1.json brief2.json
+
+# Using the --files flag
+node src/eval/runEvaluations.js --files brief1.json brief2.json
+
+# Without .json extension (auto-added)
+node src/eval/runEvaluations.js brief1 brief2
+```
+
+**Get help:**
+
+```bash
+node src/eval/runEvaluations.js --help
+```
+
+### What the Evaluation Measures
+
+The evaluation harness computes several key metrics:
+
+- **Style violations per 1,000 words** - Checks adherence to your style pack rules
+- **Reading level band compliance** - Ensures content matches target audience
+- **API latency** - Response times for performance benchmarking
+- **Quality metrics** - Across different prompt templates and providers
+
+### Sample Output
+
+```json
+{
+  "count": 2,
+  "latency": {
+    "p50": 125,
+    "p95": 180
+  },
+  "samples": [
+    {
+      "brief": "brief1.json",
+      "latencyMs": 125,
+      "style": {
+        "violations": 0,
+        "readingLevel": "appropriate",
+        "mustUse": ["privacy", "startup"],
+        "mustAvoid": []
+      }
+    }
+  ]
+}
+```
+
+### Golden Set Structure
+
+The evaluation system uses files in the `golden_set/` directory:
+
+- `golden_set/briefs/` - Sample input briefs for testing scaffold generation
+- `golden_set/transcripts/` - Sample transcripts for summarization testing
+- `golden_set/repurposing/` - Sample content for repurposing evaluation
+
+### Creating Custom Evaluation Sets
+
+To create your own evaluation briefs:
+
+1. Add JSON files to `golden_set/briefs/` with the structure:
+
+   ```json
+   {
+     "asset_type": "blog post",
+     "topic": "Privacy-first analytics",
+     "audience": "startup founders",
+     "tone": "confident",
+     "word_count": 600
+   }
+   ```
+
+2. Run evaluations on your custom files:
+   ```bash
+   node src/eval/runEvaluations.js my-custom-brief.json
+   ```
+
+### Comparing Providers
+
+You can compare different AI providers by switching the `PROVIDER` environment variable and running the same evaluation:
+
+```bash
+# Test with OpenAI
+PROVIDER=openai node src/eval/runEvaluations.js
+
+# Test with Claude
+PROVIDER=anthropic node src/eval/runEvaluations.js
+
+# Test with mock provider (no API costs)
+PROVIDER=mock node src/eval/runEvaluations.js
+```
 
 ## Environment Variables
 

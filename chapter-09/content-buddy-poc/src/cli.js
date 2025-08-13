@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import 'dotenv/config'; // Add this line at the top
+import 'dotenv/config';
 import { getProvider } from './providers/provider.js';
 import {
   compilePrompt,
@@ -43,6 +43,16 @@ function extractPromptText(compiled) {
   );
 }
 
+// Helper function to output text to console or file
+function outputResult(text, outputFile) {
+  if (outputFile) {
+    fs.writeFileSync(path.resolve(outputFile), text, 'utf8');
+    console.log(`Output written to: ${outputFile}`);
+  } else {
+    console.log(text);
+  }
+}
+
 async function main() {
   const { cmd, args } = parseArgs();
   const provider = await getProvider();
@@ -63,7 +73,7 @@ async function main() {
     );
     const promptText = extractPromptText(compiled);
     const out = await provider.generateText(promptText);
-    console.log(out);
+    outputResult(out, args.output);
   } else if (cmd === 'expand') {
     const t = await loadTemplate('section_expand@1.0.0');
     const style = await loadStylePack();
@@ -80,7 +90,7 @@ async function main() {
     );
     const promptText = extractPromptText(compiled);
     const out = await provider.generateText(promptText);
-    console.log(out);
+    outputResult(out, args.output);
   } else if (cmd === 'rewrite') {
     const t = await loadTemplate('rewrite_localize@1.0.0');
     const style = await loadStylePack();
@@ -98,7 +108,7 @@ async function main() {
     );
     const promptText = extractPromptText(compiled);
     const out = await provider.generateText(promptText);
-    console.log(out);
+    outputResult(out, args.output);
   } else if (cmd === 'summarize') {
     const t = await loadTemplate('summarize_grounded@1.0.0');
     const style = await loadStylePack();
@@ -110,7 +120,7 @@ async function main() {
     const compiled = compilePrompt(t, { mode, transcript_text }, style);
     const promptText = extractPromptText(compiled);
     const out = await provider.generateText(promptText);
-    console.log(out);
+    outputResult(out, args.output);
   } else if (cmd === 'repurpose') {
     const t = await loadTemplate('repurpose_pack@1.0.0');
     const channels = JSON.parse(
@@ -128,15 +138,18 @@ async function main() {
     );
     const promptText = extractPromptText(compiled);
     const out = await provider.generateText(promptText);
-    console.log(out);
+    outputResult(out, args.output);
   } else {
     console.log(`Unknown command: ${cmd}
 Usage:
-  node src/cli.js scaffold --asset_type ... --topic ... --audience ... --tone ... --word_count 600
-  node src/cli.js expand --section_json '<json>'
-  node src/cli.js rewrite --text '...' --audience '...' --tone '...' --grade_level 8
-  node src/cli.js summarize --file path/to/transcript.txt --mode executive
-  node src/cli.js repurpose --file path/to/article.md`);
+  node src/cli.js scaffold --asset_type ... --topic ... --audience ... --tone ... --word_count 600 [--output file.txt]
+  node src/cli.js expand --section_json '<json>' [--output file.txt]
+  node src/cli.js rewrite --text '...' --audience '...' --tone '...' --grade_level 8 [--output file.txt]
+  node src/cli.js summarize --file path/to/transcript.txt --mode executive [--output file.txt]
+  node src/cli.js repurpose --file path/to/article.md [--output file.txt]
+
+Options:
+  --output <file>    Write output to file instead of console`);
   }
 }
 
