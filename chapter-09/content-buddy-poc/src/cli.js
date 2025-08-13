@@ -34,6 +34,47 @@ function extractPromptText(compiled) {
   if (typeof compiled === 'string') {
     return compiled;
   }
+
+  // Format the prompt with style pack information
+  if (compiled.system && compiled.user && compiled.stylePack) {
+    const styleInstructions = [];
+
+    if (compiled.stylePack.brand_voice) {
+      styleInstructions.push(`Brand voice: ${compiled.stylePack.brand_voice}`);
+    }
+
+    if (compiled.stylePack.reading_level) {
+      styleInstructions.push(
+        `Target reading level: ${compiled.stylePack.reading_level}`
+      );
+    }
+
+    if (compiled.stylePack.must_use && compiled.stylePack.must_use.length > 0) {
+      styleInstructions.push(
+        `Must use these terms: ${compiled.stylePack.must_use.join(', ')}`
+      );
+    }
+
+    if (
+      compiled.stylePack.must_avoid &&
+      compiled.stylePack.must_avoid.length > 0
+    ) {
+      styleInstructions.push(
+        `Avoid these terms: ${compiled.stylePack.must_avoid.join(', ')}`
+      );
+    }
+
+    const systemPrompt =
+      compiled.system +
+      (styleInstructions.length > 0
+        ? `\n\nStyle requirements:\n${styleInstructions
+            .map((s) => `- ${s}`)
+            .join('\n')}`
+        : '');
+
+    return `${systemPrompt}\n\nUser: ${compiled.user}`;
+  }
+
   // Try common property names for the actual prompt text
   return (
     compiled.prompt ||

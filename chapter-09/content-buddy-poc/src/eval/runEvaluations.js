@@ -117,11 +117,46 @@ async function run() {
     const out = await provider.generateText(JSON.stringify(compiled));
     const latencyMs = Date.now() - start;
 
-    // In real flow we'd send output to model, but with mock we lint the input brief text if present.
-    const sampleText = `Sample draft mentioning ${
-      style.must_use?.[0] || ''
-    } and avoiding ${style.must_avoid?.[0] || ''}.`;
-    const lint = lintStyle(sampleText, style);
+    // Extract text content for analysis based on the template type
+    let textToAnalyze = out;
+
+    // For scaffold templates that return JSON, extract the actual text content
+    if (t.id === 'draft_scaffold') {
+      try {
+        const jsonOutput = JSON.parse(out);
+        // Extract text from title and bullets for reading level analysis
+        const textParts = [];
+
+        if (jsonOutput.title) {
+          textParts.push(jsonOutput.title + '.');
+        }
+
+        if (jsonOutput.sections) {
+          jsonOutput.sections.forEach((section) => {
+            if (section.heading) {
+              textParts.push(section.heading + '.');
+            }
+            if (section.bullets) {
+              section.bullets.forEach((bullet) => {
+                // Ensure bullets end with periods for proper sentence detection
+                const bulletText = bullet.trim();
+                textParts.push(
+                  bulletText + (bulletText.endsWith('.') ? '' : '.')
+                );
+              });
+            }
+          });
+        }
+
+        textToAnalyze = textParts.join(' ');
+      } catch (e) {
+        // If it's not valid JSON, use the raw output
+        textToAnalyze = out;
+      }
+    }
+
+    // Use the extracted text content for style linting
+    const lint = lintStyle(textToAnalyze, style);
 
     results.push({
       brief: f,
