@@ -1,0 +1,12 @@
+{
+  "id": "repurpose_pack",
+  "version": "1.0.0",
+  "purpose": "Multi-channel repurposing",
+  "inputs": [
+    "markdown",
+    "channel_constraints"
+  ],
+  "system": "Create a multi-channel content pack from a single source.",
+  "user": "Source Markdown: \"\"\"{markdown}\"\"\"\nChannel presets JSON: {channel_constraints}\nOutput JSON with keys per channel and 2\u20133 diverse variants each. Include a brief \"rationale\".",
+  "output_note": "Object keyed by channel -> variants[]"
+}

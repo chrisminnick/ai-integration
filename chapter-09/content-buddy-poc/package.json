@@ -1,0 +1,13 @@
+{
+  "name": "content-buddy-poc",
+  "version": "0.1.0",
+  "description": "POC repo for prompt templates, style governance, and evaluation harness.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "eval": "node src/eval/runEvaluations.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1"
+  }
+}

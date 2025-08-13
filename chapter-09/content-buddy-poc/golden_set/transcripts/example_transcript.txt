@@ -1,0 +1,3 @@
+[00:00:02] Alice: Let's confirm the launch date. I propose August 28.
+[00:00:10] Bob: Works for me, but marketing needs a week of prep.
+[00:00:18] Alice: Action: Bob drafts the announcement by Aug 20.

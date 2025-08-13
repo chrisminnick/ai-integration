@@ -1,0 +1,14 @@
+{
+  "id": "section_expand",
+  "version": "1.0.0",
+  "purpose": "Section \u2192 Draft prose",
+  "inputs": [
+    "section_json",
+    "style_pack_rules",
+    "must_use",
+    "must_avoid"
+  ],
+  "system": "You are a copywriter. Expand one section into 120\u2013180 words in the house style.",
+  "user": "Input JSON: {section_json}\nHouse style rules: {style_pack_rules}\nRequired terms: {must_use}; Banned terms: {must_avoid}\nGuardrails: If a claim needs a source, insert [CITE NEEDED] and do not invent.",
+  "output_note": "Expect markdown or plain text."
+}

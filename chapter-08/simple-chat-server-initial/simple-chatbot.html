@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Chatbot</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Simple Chatbot</h1>
+    <div id="chatLog"></div>
+    <div>
+      <input type="text" id="msgInput" placeholder="Type your message..." />
+      <button id="sendButton" onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+      function updateChatLog({ from, text }) {
+        const chatLog = document.getElementById('chatLog');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${from}`;
+        messageDiv.textContent = text;
+        chatLog.appendChild(messageDiv);
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }
+
+      async function sendMessage() {
+        const input = document.getElementById('msgInput');
+        const sendButton = document.getElementById('sendButton');
+        const message = input.value.trim();
+
+        if (!message) return;
+
+        try {
+          const res = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message }),
+          });
+
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+
+          const data = await res.json();
+          updateChatLog({ from: 'user', text: message });
+          updateChatLog({ from: 'bot', text: data.reply });
+
+          input.value = '';
+        } catch (error) {
+          console.error('Error:', error);
+          updateChatLog({
+            from: 'bot',
+            text: 'Sorry, I encountered an error. Please try again.',
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -8,8 +8,7 @@
   "main": "simple-server.js",
   "scripts": {
     "start": "node simple-server.js",
-    "dev": "node --watch simple-server.js",
-    "stream": "node --watch simple-server-stream.js"
+    "dev": "node --watch simple-server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

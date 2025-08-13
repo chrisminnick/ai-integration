@@ -1,0 +1,20 @@
+{
+  "linkedin": {
+    "max_chars": 900,
+    "hashtags_max": 3,
+    "links_max": 1,
+    "tone": "professional"
+  },
+  "x": {
+    "max_chars": 280,
+    "hashtags_max": 2,
+    "links_max": 1,
+    "linebreaks": false
+  },
+  "email": {
+    "subject_max": 60,
+    "preheader_max": 40,
+    "body_max_words": 120,
+    "cta_required": true
+  }
+}

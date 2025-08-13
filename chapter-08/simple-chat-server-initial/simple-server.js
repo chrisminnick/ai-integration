@@ -19,40 +19,22 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Chatbot endpoint that accepts conversation history
+// Simple chatbot endpoint
 app.post('/api/chat', async (req, res) => {
   try {
-    const { messages } = req.body;
+    const { message } = req.body;
 
     // Validate input
-    if (!messages || !Array.isArray(messages)) {
+    if (!message || typeof message !== 'string') {
       return res
         .status(400)
-        .json({ error: 'Messages is required and must be an array' });
-    }
-
-    if (messages.length === 0) {
-      return res.status(400).json({ error: 'Messages array cannot be empty' });
-    }
-
-    // Validate each message has required properties
-    for (const msg of messages) {
-      if (!msg.role || !msg.content) {
-        return res.status(400).json({
-          error: 'Each message must have role and content properties',
-        });
-      }
-      if (typeof msg.content !== 'string') {
-        return res
-          .status(400)
-          .json({ error: 'Message content must be a string' });
-      }
+        .json({ error: 'Message is required and must be a string' });
     }
 
     // Call OpenAI API
     const response = await openai.chat.completions.create({
       model: 'gpt-4',
-      messages: messages, // Use the entire conversation history
+      messages: [{ role: 'user', content: message }],
       max_tokens: 150, // Limit response length for demo
       temperature: 0.7, // Add some creativity
     });
@@ -66,11 +48,6 @@ app.post('/api/chat', async (req, res) => {
       message: 'Please check your API key and try again',
     });
   }
-});
-
-// Serve the HTML file on the root route
-app.get('/', (req, res) => {
-  res.sendFile('simple-chatbot.html', { root: '.' });
 });
 
 // Start server

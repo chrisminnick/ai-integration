@@ -61,3 +61,66 @@
   background-color: #6c757d;
   cursor: not-allowed;
 }
+
+#welcomeBox {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+#welcomeBox div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+#welcomeBox input {
+  flex: 1;
+  padding: 8px;
+}
+#welcomeBox button {
+  padding: 8px 16px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+.user-info {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
+}
+.message.streaming .cursor {
+  animation: blink 1s infinite;
+  font-weight: bold;
+  margin-left: 2px;
+}
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+#chatLog {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+#chatLog::-webkit-scrollbar {
+  width: 8px;
+}
+#chatLog::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+#chatLog::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+#chatLog::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
