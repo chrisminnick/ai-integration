@@ -1,13 +1,35 @@
 {
   "name": "content-buddy-poc",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "POC repo for prompt templates, style governance, and evaluation harness.",
   "type": "module",
   "private": true,
   "scripts": {
-    "eval": "node src/eval/runEvaluations.js"
+    "start": "node app.js",
+    "dev": "NODE_ENV=development node app.js",
+    "eval": "node app.js evaluate",
+    "health": "node app.js health",
+    "validate": "node app.js validate",
+    "eval:comprehensive": "./golden_set/run_comprehensive_evaluation.sh",
+    "generate": "node app.js generate",
+    "scaffold": "node src/cli.js scaffold",
+    "test": "npm run validate && npm run health",
+    "setup": "cp .env.template .env && echo 'Please edit .env with your API keys'",
+    "lint": "echo 'No linter configured'",
+    "clean": "rm -rf logs/ tmp/ .cache/"
   },
   "dependencies": {
     "dotenv": "^17.2.1"
-  }
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "ai",
+    "content-generation",
+    "templates",
+    "evaluation",
+    "style-governance"
+  ]
 }

@@ -1,47 +1,112 @@
-# Content Buddy (POC)
+# Content Buddy POC
 
-A practical proof-of-concept for a single GenAI application that creates and revises content—fast, on-brand, and grounded in truth.
-This POC focuses on **text** generation and shows a pattern you can extend to images, audio, and video later.
+A production-ready proof-of-concept for AI-powered content generation with enterprise-grade reliability, monitoring, and evaluation capabilities. This system demonstrates a complete workflow from content generation to quality assurance using multiple AI providers.
 
-## Goals
+## 🚀 Features
 
-- Prompt templates in version control
-- Style governance (style pack + lint/repair)
-- Grounded summarization with citations
-- Repurposing to channel presets
-- Prompt testing & versioning workflow (tool-agnostic)
-- Multi-provider support for different AI models
+- **Multi-Provider AI Support** - OpenAI, Anthropic, Gemini with automatic failover
+- **Production-Ready Architecture** - Error handling, circuit breakers, health monitoring
+- **Comprehensive Evaluation** - Golden set testing with 9 test categories
+- **Template Management** - Versioned JSON templates with A/B testing
+- **Style Governance** - Brand voice enforcement and content validation
+- **Observability** - Structured logging, metrics, and monitoring
+- **CLI Interface** - Complete command-line interface for all operations
 
-## Structure
+## 📋 Requirements
 
-- `prompts/` — JSON prompt templates with metadata
-- `style/stylepack.json` — brand voice + constraints
-- `configs/channels.json` — channel presets for repurposing
-- `configs/providers.json` — AI provider configurations
-- `golden_set/` — sample inputs for evaluation
-- `src/providers/` — provider implementations (OpenAI, Anthropic, Gemini, Mock)
-- `src/` — minimal prompt service, lint, and evaluation harness
-- `docs/` — architecture notes
-- `.env.example` — environment variables you may need
+- Node.js 18+
+- At least one AI provider API key (OpenAI, Anthropic, or Gemini)
 
-## Quick start
+## ⚡ Quick Start
 
-1. Ensure Node 18+ is installed.
-2. Copy `.env.example` to `.env` and configure your provider:
-   ```bash
-   cp .env.example .env
-   ```
-3. Set your preferred provider and API key:
-   ```bash
-   # Choose your provider: openai, anthropic, gemini, or mock
-   PROVIDER=openai
-   OPENAI_API_KEY=your_api_key_here
-   ```
-4. No additional dependencies required - uses built-in fetch and ES6 modules.
-5. Try the CLI:
-   ```bash
-   node src/cli.js scaffold --asset_type "landing page" --topic "Privacy-first analytics" --audience "startup founders" --tone "confident" --word_count 600
-   ```
+### 1. Setup Environment
+
+```bash
+# Clone and navigate to project
+cd content-buddy-poc
+
+# Create environment configuration
+npm run setup
+
+# Edit .env with your API keys
+# Required: Set at least one provider API key
+PROVIDER=openai
+OPENAI_API_KEY=your_api_key_here
+```
+
+### 2. Verify Installation
+
+```bash
+# Check system health
+npm run health
+
+# Validate templates and configuration
+npm run validate
+```
+
+### 3. Generate Content
+
+```bash
+# Generate content using a template
+npm run generate repurpose_pack@1.0.0 my-content/build-ai-applications.json output.json
+
+# Or use the CLI directly
+node app.js generate repurpose_pack@1.0.0 input.json output.json
+```
+
+### 4. Run Evaluations
+
+```bash
+# Run comprehensive evaluation suite
+npm run eval:comprehensive
+
+# Run specific evaluations
+npm run evaluate
+```
+
+## 🏗️ Architecture
+
+### Core Components
+
+- **`app.js`** - Main application entry point with integrated CLI
+- **`src/ContentBuddy.js`** - Core content generation orchestrator
+- **`src/utils/`** - Production utilities (error handling, monitoring, etc.)
+- **`prompts/`** - Versioned JSON prompt templates
+- **`golden_set/`** - Comprehensive test data across 9 categories
+- **`configs/`** - Provider and channel configurations
+- **`style/`** - Style pack governance rules
+
+### Production Utilities
+
+- **Error Handling** - Custom error types, retry logic, circuit breakers
+- **Configuration Management** - Environment-aware config with validation
+- **Observability** - Structured logging with multiple output formats
+- **Monitoring** - Health checks, metrics collection, system monitoring
+- **Provider Management** - Multi-provider support with intelligent failover
+- **Template Management** - A/B testing, caching, version management
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Key configuration options in `.env`:
+
+```bash
+# Core Settings
+NODE_ENV=development          # development/production
+LOG_LEVEL=info               # debug/info/warn/error
+PROVIDER=openai              # openai/anthropic/gemini
+
+# AI Provider Keys (set at least one)
+OPENAI_API_KEY=your_key
+ANTHROPIC_API_KEY=your_key
+GEMINI_API_KEY=your_key
+
+# Performance & Reliability
+CIRCUIT_BREAKER_THRESHOLD=5
+HEALTH_CHECK_INTERVAL=60000
+METRICS_ENABLED=true
+```
 
 ## Providers
 
