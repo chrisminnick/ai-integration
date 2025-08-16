@@ -1,0 +1,19 @@
+{
+  "asset_type": "research paper",
+  "topic": "A comprehensive analysis of quantum computing applications in cryptocurrency blockchain validation mechanisms with specific focus on Shor's algorithm implementation for RSA encryption vulnerability assessment in distributed ledger technologies and their implications for post-quantum cryptographic security frameworks in enterprise financial systems",
+  "audience": "PhD researchers in quantum computing, cryptography experts, blockchain developers, financial technology security specialists, academic institutions, and enterprise security architects",
+  "tone": "highly technical and academically rigorous with precise scientific terminology",
+  "word_count": 10000,
+  "metadata": {
+    "difficulty": "extreme",
+    "category": "edge_case",
+    "test_purpose": "Test handling of extremely long and complex inputs",
+    "challenges": [
+      "Very long topic field",
+      "Multiple specialized audiences",
+      "Complex tone requirements",
+      "High word count",
+      "Technical terminology"
+    ]
+  }
+}

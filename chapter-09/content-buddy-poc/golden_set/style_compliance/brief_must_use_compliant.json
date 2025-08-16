@@ -1,0 +1,18 @@
+{
+  "asset_type": "product page",
+  "topic": "Analytics platform with free trial and no credit card required - privacy-first approach",
+  "audience": "data teams",
+  "tone": "confident",
+  "word_count": 400,
+  "metadata": {
+    "difficulty": "easy",
+    "category": "style_compliance",
+    "test_purpose": "Test detection of must_use terms",
+    "expected_must_use_found": [
+      "free trial",
+      "no credit card",
+      "privacy-first"
+    ],
+    "compliance_expected": true
+  }
+}

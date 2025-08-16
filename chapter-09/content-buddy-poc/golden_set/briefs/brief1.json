@@ -3,5 +3,10 @@
   "topic": "Privacy-first analytics",
   "audience": "startup founders",
   "tone": "confident",
-  "word_count": 600
+  "word_count": 600,
+  "metadata": {
+    "difficulty": "medium",
+    "category": "marketing",
+    "test_purpose": "Original test case for privacy-focused landing page"
+  }
 }

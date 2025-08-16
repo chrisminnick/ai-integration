@@ -3,5 +3,10 @@
   "topic": "New feature: real-time dashboards",
   "audience": "current customers",
   "tone": "friendly",
-  "word_count": 200
+  "word_count": 200,
+  "metadata": {
+    "difficulty": "easy",
+    "category": "product_announcement",
+    "test_purpose": "Original test case for customer email notification"
+  }
 }

@@ -154,32 +154,63 @@ The evaluation harness computes several key metrics:
 
 ### Golden Set Structure
 
-The evaluation system uses files in the `golden_set/` directory:
+The evaluation system uses a comprehensive test suite in the `golden_set/` directory organized by test purpose:
 
-- `golden_set/briefs/` - Sample input briefs for testing scaffold generation
+**Core Test Categories:**
+
+- `golden_set/briefs/` - Sample input briefs for testing scaffold generation (includes easy, medium, hard, and extreme complexity levels)
 - `golden_set/transcripts/` - Sample transcripts for summarization testing
 - `golden_set/repurposing/` - Sample content for repurposing evaluation
 
-### Creating Custom Evaluation Sets
+**Quality Assurance Categories:**
 
-To create your own evaluation briefs:
+- `golden_set/edge_cases/` - Boundary conditions and unusual inputs (empty fields, special characters, extreme complexity)
+- `golden_set/style_compliance/` - Content designed to test style pack rule adherence (must_use/must_avoid terms, terminology)
+- `golden_set/performance/` - Large files and stress test scenarios
+- `golden_set/provider_comparison/` - Standardized tests for comparing AI provider outputs
+- `golden_set/domain_specific/` - Specialized content requiring domain expertise (technical, legal, medical)
+- `golden_set/expected_outputs/` - Reference outputs for validation and regression testing
 
-1. Add JSON files to `golden_set/briefs/` with the structure:
+**File Naming Convention:**
+Files follow the pattern: `{type}_{difficulty}_{description}.{ext}`
 
-   ```json
-   {
-     "asset_type": "blog post",
-     "topic": "Privacy-first analytics",
-     "audience": "startup founders",
-     "tone": "confident",
-     "word_count": 600
-   }
-   ```
+- `brief_easy_react_tutorial.json` - Simple tutorial brief
+- `transcript_hard_technical_meeting.txt` - Complex technical meeting transcript
+- `article_medium_remote_teams.md` - Medium complexity repurposing content
 
-2. Run evaluations on your custom files:
-   ```bash
-   node src/eval/runEvaluations.js my-custom-brief.json
-   ```
+### Advanced Evaluation
+
+**Comprehensive Test Suite:**
+
+```bash
+# Run the full evaluation suite across all test categories
+./scripts/run_comprehensive_evaluation.sh
+
+# Validate golden set integrity before running evaluations
+node scripts/validate_golden_set.js
+
+# Test specific categories
+node src/eval/runEvaluations.js -d golden_set/edge_cases -o scaffold
+node src/eval/runEvaluations.js -d golden_set/performance -o summarize
+node src/eval/runEvaluations.js -d golden_set/style_compliance -o scaffold
+```
+
+**Test Categories Explained:**
+
+- **Edge Cases**: Tests system robustness with empty fields, special characters, and extreme complexity
+- **Performance**: Stress tests with large content to measure latency and token usage
+- **Style Compliance**: Validates adherence to style pack rules and terminology
+- **Provider Comparison**: Standardized tests for comparing different AI providers
+- **Domain Specific**: Tests requiring specialized knowledge (technical, legal, etc.)
+
+**Quality Metrics:**
+The improved golden set measures:
+
+- Content accuracy and completeness
+- Style pack rule compliance
+- Response time and token efficiency
+- Error handling and edge case robustness
+- Cross-provider consistency
 
 ### Comparing Providers
 

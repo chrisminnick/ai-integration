@@ -1,0 +1,18 @@
+{
+  "asset_type": "technical documentation",
+  "topic": "RESTful API authentication and authorization patterns",
+  "audience": "backend developers",
+  "tone": "technical",
+  "word_count": 1500,
+  "metadata": {
+    "difficulty": "hard",
+    "category": "technical_domain",
+    "test_purpose": "Test generation of accurate technical content",
+    "domain_expertise_required": [
+      "REST API design",
+      "Authentication protocols",
+      "Security best practices",
+      "HTTP standards"
+    ]
+  }
+}
