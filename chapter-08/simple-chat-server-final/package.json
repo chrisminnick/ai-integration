@@ -1,0 +1,20 @@
+{
+  "name": "simple-chat",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "simple-server.js",
+  "scripts": {
+    "start": "node simple-server.js",
+    "stream": "node simple-server-stream.js",
+    "dev": "node --watch simple-server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "openai": "^5.11.0"
+  }
+}

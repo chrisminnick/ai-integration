@@ -47,7 +47,7 @@ function App() {
           id="messageInput"
           onChange={(e) => setInput(e.target.value)}
         />
-        <button id="sendButton" onClick={handleSend}>
+        <button id="sendButton" onClick={() => handleSend()}>
           Send
         </button>
       </div>
