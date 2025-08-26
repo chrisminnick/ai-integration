@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PACE - Prompt-Augmented Coding Environment</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/monokai.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>PACE</h1>
+        <p>Prompt-Augmented Coding Environment</p>
+      </header>
+
+      <div class="toolbar">
+        <button id="addFeatureBtn" class="btn btn-primary">
+          <span class="btn-icon">✨</span>
+          Add an AI Feature
+        </button>
+
+        <div class="template-selector">
+          <label for="templateSelect">AI Templates:</label>
+          <select id="templateSelect" disabled>
+            <option value="">Select text first...</option>
+          </select>
+          <button id="applyTemplateBtn" class="btn btn-secondary" disabled>
+            Apply Template
+          </button>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="editor-panel">
+          <div class="panel-header">
+            <h3>Code Editor</h3>
+            <div class="editor-controls">
+              <select id="languageSelect">
+                <option value="javascript">JavaScript</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="cpp">C++</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="sql">SQL</option>
+              </select>
+            </div>
+          </div>
+          <textarea
+            id="codeEditor"
+            placeholder="Start coding here..."
+          ></textarea>
+        </div>
+
+        <div class="results-panel">
+          <div class="panel-header">
+            <h3>AI Results</h3>
+            <button id="clearResultsBtn" class="btn btn-small">Clear</button>
+          </div>
+          <div id="resultsContainer">
+            <div class="placeholder">
+              Select code and apply a template to see AI results here.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for adding new AI features -->
+    <div id="addFeatureModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Add New AI Feature</h2>
+          <span class="close">&times;</span>
+        </div>
+        <form id="addFeatureForm">
+          <div class="form-group">
+            <label for="featureName">Feature Name:</label>
+            <input
+              type="text"
+              id="featureName"
+              name="name"
+              required
+              placeholder="e.g., Explain Code, Add Comments"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="featureDescription">Description (optional):</label>
+            <input
+              type="text"
+              id="featureDescription"
+              name="description"
+              placeholder="Brief description of what this feature does"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="promptTemplate">Prompt Template:</label>
+            <textarea
+              id="promptTemplate"
+              name="template"
+              required
+              rows="6"
+              placeholder="Enter your prompt template here. Use {{selection}} where you want the selected code to be inserted.
+
+Example:
+Please explain what this code does:
+
+{{selection}}"
+            ></textarea>
+            <small class="helper-text">
+              Use <code>{{selection}}</code> to insert the selected code into
+              your prompt.
+            </small>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancelBtn">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">Add Feature</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loadingIndicator" class="loading-indicator">
+      <div class="spinner"></div>
+      <p>Processing with AI...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/sql/sql.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
