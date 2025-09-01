@@ -1,0 +1,13 @@
+{
+  "name": "vector-search-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "index": "node index.js",
+    "search": "node search.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "openai": "^4.53.2"
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Noise-Canceling Headphones",
+    "description": "Over-ear headphones with long battery life and deep bass."
+  },
+  {
+    "id": 2,
+    "name": "Ergonomic Office Chair",
+    "description": "Mesh back support with adjustable height and lumbar cushion."
+  },
+  {
+    "id": 3,
+    "name": "Stainless Steel Water Bottle",
+    "description": "Insulated bottle keeps drinks cold for 24 hours."
+  },
+  {
+    "id": 4,
+    "name": "Portable Bluetooth Speaker",
+    "description": "Compact design with powerful sound, ideal for travel."
+  }
+]

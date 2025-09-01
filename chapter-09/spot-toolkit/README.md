@@ -4,6 +4,10 @@
 
 An AI-powered content generation tool, focused on reliability, monitoring, and evaluation capabilities. This system demonstrates a complete workflow from content generation to quality assurance using multiple AI providers.
 
+## About This Project
+
+SPOT was created by Chris Minnick as a demo project for his book, "A Developer's Guide to Integrating Generative AI into Applications" (Wiley Publishing, 2026, ISBN: 9781394373130).
+
 ## 🚀 Features
 
 - **Multi-Provider AI Support** - OpenAI, Anthropic, Gemini with automatic failover

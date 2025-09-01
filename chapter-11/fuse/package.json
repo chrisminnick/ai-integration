@@ -1,0 +1,27 @@
+{
+  "name": "fuse",
+  "version": "1.0.0",
+  "description": "Find, Understand, Search, Enhance - A teaching demo for search and recommendation techniques",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run dev:server & npm run dev:client",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrisminnick/ai-integration"
+  },
+  "keywords": [
+    "search",
+    "recommendations",
+    "ai",
+    "embeddings",
+    "demo"
+  ],
+  "author": "Chris Minnick",
+  "license": "MIT"
+}

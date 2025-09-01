@@ -1,0 +1,15 @@
+{
+  "name": "recommender-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build:index": "node build_index.js",
+    "build:uservecs": "node user_vector.js",
+    "recommend": "node recommend.js",
+    "why": "node why_this.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "openai": "^4.53.2"
+  }
+}

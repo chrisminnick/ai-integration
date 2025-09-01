@@ -1,0 +1,62 @@
+[
+  {
+    "id": "doc1",
+    "title": "Introduction to Machine Learning",
+    "description": "A comprehensive guide to machine learning fundamentals, covering supervised and unsupervised learning algorithms.",
+    "tags": ["machine learning", "AI", "algorithms", "data science"]
+  },
+  {
+    "id": "doc2",
+    "title": "React Development Best Practices",
+    "description": "Modern React patterns, hooks, performance optimization, and component architecture for scalable applications.",
+    "tags": ["react", "javascript", "frontend", "web development"]
+  },
+  {
+    "id": "doc3",
+    "title": "Database Design Principles",
+    "description": "Relational database design, normalization, indexing strategies, and query optimization techniques.",
+    "tags": ["database", "SQL", "design", "performance"]
+  },
+  {
+    "id": "doc4",
+    "title": "Docker Container Orchestration",
+    "description": "Container deployment, Kubernetes basics, microservices architecture, and DevOps best practices.",
+    "tags": ["docker", "kubernetes", "devops", "containers"]
+  },
+  {
+    "id": "doc5",
+    "title": "Python Data Analysis",
+    "description": "Data manipulation with pandas, visualization with matplotlib, statistical analysis and data cleaning techniques.",
+    "tags": ["python", "data analysis", "pandas", "visualization"]
+  },
+  {
+    "id": "doc6",
+    "title": "API Security Guidelines",
+    "description": "Authentication, authorization, rate limiting, input validation, and security best practices for REST APIs.",
+    "tags": ["security", "API", "authentication", "REST"]
+  },
+  {
+    "id": "doc7",
+    "title": "Neural Networks Fundamentals",
+    "description": "Deep learning basics, backpropagation, neural network architectures, and training optimization.",
+    "tags": ["neural networks", "deep learning", "AI", "training"]
+  },
+  {
+    "id": "doc8",
+    "title": "Cloud Architecture Patterns",
+    "description": "Scalable cloud solutions, serverless computing, microservices, and distributed system design patterns.",
+    "tags": ["cloud", "architecture", "serverless", "distributed systems"]
+  },
+  {
+    "id": "doc9",
+    "title": "JavaScript Testing Strategies",
+    "description": "Unit testing, integration testing, test-driven development, and automated testing frameworks for JavaScript.",
+    "tags": ["testing", "javascript", "TDD", "automation"]
+  },
+  {
+    "id": "doc10",
+    "title": "Git Workflow Management",
+    "description": "Version control strategies, branching models, code review processes, and collaborative development workflows.",
+    "tags": ["git", "version control", "workflow", "collaboration"]
+  }
+]

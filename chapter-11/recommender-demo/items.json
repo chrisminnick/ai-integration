@@ -1,0 +1,52 @@
+[
+  {
+    "id": "b1",
+    "title": "Beginner JavaScript Course",
+    "desc": "Hands-on intro to JS fundamentals and DOM."
+  },
+  {
+    "id": "b2",
+    "title": "Advanced TypeScript Patterns",
+    "desc": "Deep dive into generics, decorators, and typing strategies."
+  },
+  {
+    "id": "d1",
+    "title": "Data Visualization with D3",
+    "desc": "Build dynamic charts and dashboards for the web."
+  },
+  {
+    "id": "ml1",
+    "title": "Intro to Machine Learning",
+    "desc": "Supervised learning, evaluation, and model basics."
+  },
+  {
+    "id": "ml2",
+    "title": "LLM Prompt Engineering",
+    "desc": "Prompt design, structured output, and evaluation techniques."
+  },
+  {
+    "id": "ux1",
+    "title": "Practical UX for Engineers",
+    "desc": "Usability principles, heuristics, and prototyping."
+  },
+  {
+    "id": "db1",
+    "title": "SQL for Analytics",
+    "desc": "Joins, windows, and query optimization for reporting."
+  },
+  {
+    "id": "ops1",
+    "title": "DevOps Fundamentals",
+    "desc": "CI/CD, observability, and cloud deployment basics."
+  },
+  {
+    "id": "sec1",
+    "title": "Web Security Essentials",
+    "desc": "Auth, OWASP Top 10, and secure coding practices."
+  },
+  {
+    "id": "fe1",
+    "title": "React Performance Tuning",
+    "desc": "Profiling, code-splitting, and rendering strategies."
+  }
+]
