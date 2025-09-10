@@ -10,6 +10,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [userFeedback, setUserFeedback] = useState({});
+  const [hasSearched, setHasSearched] = useState(false);
 
   const userId = 'demo_user';
 
@@ -37,6 +38,7 @@ function App() {
 
     setLoading(true);
     setError('');
+    setHasSearched(true);
 
     try {
       const response = await fetch(`${API_BASE}/search`, {
@@ -198,36 +200,87 @@ function App() {
 
       {error && <div className="error">{error}</div>}
 
-      {results.length > 0 && (
-        <div className="results-container">
-          <h2 className="section-title">
-            Search Results ({results.length}) -{' '}
-            {searchMode.charAt(0).toUpperCase() + searchMode.slice(1)} Mode
-          </h2>
-          {results.map((item) => (
-            <ResultItem key={item.id} item={item} showActions={true} />
-          ))}
-        </div>
-      )}
-
-      {!loading && query && results.length === 0 && (
-        <div className="no-results">
-          No results found for "{query}". Try a different search term or mode.
-        </div>
-      )}
-
-      <div className="recommendations-section">
-        <h2 className="section-title">Personalized Recommendations</h2>
-        {recommendations.length > 0 ? (
-          recommendations.map((item) => (
-            <ResultItem key={item.id} item={item} showActions={true} />
-          ))
-        ) : (
-          <div className="no-results">
-            No personalized recommendations yet. Interact with search results to
-            build your profile!
+      <div className="main-content">
+        <div className="search-results-section">
+          <div className="section-header">
+            <h2 className="section-title">🔍 Search Results</h2>
+            <p className="section-description">
+              Results from your {searchMode} search{query && ` for "${query}"`}
+            </p>
           </div>
-        )}
+
+          {results.length > 0 && (
+            <div className="results-container">
+              <div className="results-meta">
+                {results.length} result{results.length !== 1 ? 's' : ''} •{' '}
+                {searchMode.charAt(0).toUpperCase() + searchMode.slice(1)} mode
+              </div>
+              {results.map((item) => (
+                <ResultItem key={item.id} item={item} showActions={true} />
+              ))}
+            </div>
+          )}
+
+          {!loading && hasSearched && query && results.length === 0 && (
+            <div className="no-results">
+              No results found for "{query}". Try a different search term or
+              mode.
+            </div>
+          )}
+
+          {!hasSearched && (
+            <div className="no-search">
+              <p>👆 Enter a search term above to see results</p>
+              <p className="search-tips">
+                <strong>Try searching for:</strong>
+                <br />
+                • "javascript" (keyword matching)
+                <br />
+                • "coding" (semantic similarity)
+                <br />• "ML" vs "machine learning" (compare modes)
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="recommendations-section">
+          <div className="section-header">
+            <h2 className="section-title">⭐ Personalized For You</h2>
+            <p className="section-description">
+              Recommendations based on your interactions
+            </p>
+          </div>
+
+          {recommendations.length > 0 ? (
+            <div className="recommendations-container">
+              <div className="results-meta">
+                {recommendations.length} recommendation
+                {recommendations.length !== 1 ? 's' : ''} • Updated in real-time
+              </div>
+              {recommendations.map((item) => (
+                <ResultItem
+                  key={`rec-${item.id}`}
+                  item={item}
+                  showActions={true}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="no-recommendations">
+              <p>👍 No personalized recommendations yet</p>
+              <p className="interaction-tips">
+                <strong>Build your profile by:</strong>
+                <br />
+                • Liking relevant documents
+                <br />
+                • Saving interesting content
+                <br />
+                • Marking irrelevant results
+                <br />• Watch this section update in real-time!
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

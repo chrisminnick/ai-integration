@@ -1,15 +1,20 @@
 {
   "name": "recommender-demo",
   "version": "1.0.0",
-  "type": "module",
+  "main": "index.js",
   "scripts": {
     "build:index": "node build_index.js",
     "build:uservecs": "node user_vector.js",
     "recommend": "node recommend.js",
     "why": "node why_this.js"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "description": "",
   "dependencies": {
-    "dotenv": "^16.4.5",
-    "openai": "^4.53.2"
+    "dotenv": "^17.2.2",
+    "openai": "^5.20.1"
   }
 }

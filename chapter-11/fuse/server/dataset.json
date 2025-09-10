@@ -58,5 +58,119 @@
     "title": "Git Workflow Management",
     "description": "Version control strategies, branching models, code review processes, and collaborative development workflows.",
     "tags": ["git", "version control", "workflow", "collaboration"]
+  },
+  {
+    "id": "doc11",
+    "title": "JavaScript All-in-One For Dummies",
+    "description": "Complete guide to JavaScript programming covering fundamentals, DOM manipulation, async programming, and modern ES6+ features for beginners and intermediate developers.",
+    "tags": ["javascript", "programming", "web development", "beginner", "DOM"]
+  },
+  {
+    "id": "doc12",
+    "title": "HTML and CSS All-in-One For Dummies",
+    "description": "Comprehensive introduction to web development with HTML5 and CSS3, covering semantic markup, responsive design, flexbox, grid, and modern styling techniques.",
+    "tags": ["HTML", "CSS", "web development", "responsive design", "frontend"]
+  },
+  {
+    "id": "doc13",
+    "title": "React For Dummies",
+    "description": "Learn React from the ground up with practical examples, component design, state management, hooks, and building real-world applications.",
+    "tags": ["react", "javascript", "components", "hooks", "frontend"]
+  },
+  {
+    "id": "doc14",
+    "title": "Beginning ReactJS Foundations",
+    "description": "Master the fundamentals of React development including JSX, props, state, lifecycle methods, and creating interactive user interfaces.",
+    "tags": ["react", "JSX", "state management", "UI", "web development"]
+  },
+  {
+    "id": "doc15",
+    "title": "Coding with JavaScript For Dummies",
+    "description": "Step-by-step guide to JavaScript programming with hands-on projects, covering variables, functions, objects, arrays, and problem-solving techniques.",
+    "tags": ["javascript", "programming", "coding", "beginner", "projects"]
+  },
+  {
+    "id": "doc16",
+    "title": "WebAssembly For Dummies",
+    "description": "Introduction to WebAssembly technology, performance optimization, integration with JavaScript, and building high-performance web applications.",
+    "tags": ["webassembly", "performance", "javascript", "optimization", "web"]
+  },
+  {
+    "id": "doc17",
+    "title": "Beginning JavaScript and CSS Development",
+    "description": "Learn to create dynamic websites by combining JavaScript programming with CSS styling, including animations, transitions, and interactive elements.",
+    "tags": [
+      "javascript",
+      "CSS",
+      "web development",
+      "animations",
+      "interactive"
+    ]
+  },
+  {
+    "id": "doc18",
+    "title": "Modern Web Development with Node.js",
+    "description": "Build scalable server-side applications with Node.js, covering Express.js, APIs, databases, authentication, and deployment strategies.",
+    "tags": ["nodejs", "server-side", "express", "API", "backend"]
+  },
+  {
+    "id": "doc19",
+    "title": "Progressive Web Apps Development Guide",
+    "description": "Create app-like experiences on the web with service workers, offline functionality, push notifications, and responsive design patterns.",
+    "tags": ["PWA", "service workers", "offline", "responsive", "web apps"]
+  },
+  {
+    "id": "doc20",
+    "title": "JavaScript Testing and Debugging",
+    "description": "Master testing methodologies, debugging techniques, unit testing with Jest, integration testing, and maintaining code quality in JavaScript projects.",
+    "tags": ["testing", "debugging", "jest", "quality assurance", "javascript"]
+  },
+  {
+    "id": "doc21",
+    "title": "Web Performance Optimization Techniques",
+    "description": "Improve website speed and user experience through code optimization, image compression, lazy loading, caching strategies, and performance monitoring.",
+    "tags": [
+      "performance",
+      "optimization",
+      "web development",
+      "user experience",
+      "caching"
+    ]
+  },
+  {
+    "id": "doc22",
+    "title": "AI Integration for Web Developers",
+    "description": "Integrate artificial intelligence capabilities into web applications using APIs, machine learning models, natural language processing, and computer vision.",
+    "tags": ["AI", "machine learning", "web development", "APIs", "integration"]
+  },
+  {
+    "id": "doc23",
+    "title": "Serverless Web Development",
+    "description": "Build and deploy serverless applications using cloud functions, JAMstack architecture, static site generators, and modern deployment workflows.",
+    "tags": ["serverless", "JAMstack", "cloud", "deployment", "architecture"]
+  },
+  {
+    "id": "doc24",
+    "title": "Web Accessibility and Inclusive Design",
+    "description": "Create accessible web experiences for all users, covering ARIA labels, keyboard navigation, screen readers, and inclusive design principles.",
+    "tags": [
+      "accessibility",
+      "inclusive design",
+      "ARIA",
+      "usability",
+      "web standards"
+    ]
+  },
+  {
+    "id": "doc25",
+    "title": "Mobile-First Web Development",
+    "description": "Design and develop responsive websites with mobile-first approach, touch interfaces, progressive enhancement, and cross-device compatibility.",
+    "tags": [
+      "mobile-first",
+      "responsive",
+      "touch interfaces",
+      "cross-device",
+      "UX"
+    ]
   }
 ]

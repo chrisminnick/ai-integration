@@ -3,37 +3,17 @@
     "id": "u_alyssa",
     "profile": "Full-stack dev pivoting into ML and LLM apps; prefers hands-on material.",
     "interactions": [
-      {
-        "itemId": "ml1",
-        "signal": "view",
-        "weight": 0.8
-      },
-      {
-        "itemId": "ml2",
-        "signal": "like",
-        "weight": 1.0
-      },
-      {
-        "itemId": "b1",
-        "signal": "complete",
-        "weight": 0.9
-      }
+      { "itemId": "ml1", "signal": "view", "weight": 0.8 },
+      { "itemId": "ml2", "signal": "like", "weight": 1.0 },
+      { "itemId": "b1", "signal": "complete", "weight": 0.9 }
     ]
   },
   {
     "id": "u_ben",
     "profile": "Frontend engineer focused on performance and data viz.",
     "interactions": [
-      {
-        "itemId": "fe1",
-        "signal": "like",
-        "weight": 1.0
-      },
-      {
-        "itemId": "d1",
-        "signal": "view",
-        "weight": 0.7
-      }
+      { "itemId": "fe1", "signal": "like", "weight": 1.0 },
+      { "itemId": "d1", "signal": "view", "weight": 0.7 }
     ]
   }
 ]
