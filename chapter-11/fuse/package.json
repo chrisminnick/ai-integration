@@ -23,5 +23,12 @@
     "demo"
   ],
   "author": "Chris Minnick",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "openai": "^5.20.0",
+    "sqlite3": "^5.1.7"
+  }
 }
