@@ -2,6 +2,8 @@
 
 <div align="center">
 
+<img src="9781394373130-cover.jpg" alt="A Developer's Guide to Integrating AI into Applications - Book Cover" width="300">
+
 **Code Examples and Demos**
 
 [![Book](https://img.shields.io/badge/Wiley-2026-blue)](https://www.wiley.com)
