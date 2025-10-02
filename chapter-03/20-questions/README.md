@@ -98,6 +98,34 @@ Content-Type: application/json
 }
 ```
 
+## Testing the API
+
+For easy testing of the HTTP endpoints, you can use any of the following tools:
+
+1. **VS Code REST Client Extension**: Install the "REST Client" extension in VS Code and use the provided `sample-requests.http` file to make requests directly from the editor.
+
+2. **HTTPie**: A user-friendly command-line HTTP client:
+
+   ```sh
+   # Install HTTPie
+   pip install httpie
+
+   # Example usage
+   http POST 127.0.0.1:5000/ask session_id="my-session" question="Is it edible?"
+   ```
+
+3. **curl**: The classic command-line tool (pre-installed on most systems):
+
+   ```sh
+   curl -X POST http://127.0.0.1:5000/ask \
+     -H "Content-Type: application/json" \
+     -d '{"session_id": "my-session", "question": "Is it edible?"}'
+   ```
+
+4. **Postman**: A popular GUI application for API testing.
+
+See `sample-requests.http` for ready-to-use example requests.
+
 ## Notes
 
 - Each session is tracked in memory using the `session_id`. If the server restarts, all sessions are lost.

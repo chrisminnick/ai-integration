@@ -1,0 +1,84 @@
+# 20 Questions Game - Sample HTTP Requests
+# This file contains example HTTP requests for testing the 20 Questions API
+# You can use these with VS Code REST Client extension, HTTPie, curl, or any HTTP client
+
+### Start a game session and ask your first question
+POST http://127.0.0.1:5000/ask
+Content-Type: application/json
+
+{
+  "session_id": "game-session-1",
+  "question": "Is it a living thing?"
+}
+
+### Ask another question in the same session
+POST http://127.0.0.1:5000/ask
+Content-Type: application/json
+
+{
+  "session_id": "game-session-1",
+  "question": "Is it an animal?"
+}
+
+### Ask about size
+POST http://127.0.0.1:5000/ask
+Content-Type: application/json
+
+{
+  "session_id": "game-session-1",
+  "question": "Is it bigger than a breadbox?"
+}
+
+### Ask about mobility
+POST http://127.0.0.1:5000/ask
+Content-Type: application/json
+
+{
+  "session_id": "game-session-1",
+  "question": "Does it have a shell?"
+}
+
+### Make a guess - correct example
+POST http://127.0.0.1:5000/guess
+Content-Type: application/json
+
+{
+  "session_id": "game-session-1",
+  "guess": "elephant"
+}
+
+### Make a guess - incorrect example
+POST http://127.0.0.1:5000/guess
+Content-Type: application/json
+
+{
+  "session_id": "game-session-1",
+  "guess": "cat"
+}
+
+### Start a new game session
+POST http://127.0.0.1:5000/ask
+Content-Type: application/json
+
+{
+  "session_id": "game-session-2",
+  "question": "Is it made by humans?"
+}
+
+### Example curl commands
+# Ask a question:
+# curl -X POST http://127.0.0.1:5000/ask \
+#   -H "Content-Type: application/json" \
+#   -d '{"session_id": "my-session", "question": "Is it edible?"}'
+
+# Make a guess:
+# curl -X POST http://127.0.0.1:5000/guess \
+#   -H "Content-Type: application/json" \
+#   -d '{"session_id": "my-session", "guess": "apple"}'
+
+### Example HTTPie commands
+# Ask a question:
+# http POST 127.0.0.1:5000/ask session_id="my-session" question="Is it edible?"
+
+# Make a guess:
+# http POST 127.0.0.1:5000/guess session_id="my-session" guess="apple"
