@@ -49,6 +49,7 @@ A teaching demo application for experimenting with search and recommendation tec
 4. **Load sample data and build search index**:
 
    ```bash
+   cd server
    npm run load
    ```
 
