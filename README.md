@@ -13,7 +13,7 @@
 
 </div>
 
-## 📖 About This Book
+## About This Book
 
 This repository contains **all the code examples, demos, and hands-on projects from every chapter** of **"A Developer's Guide to Integrating Generative AI into Applications"** by Chris Minnick, published by Wiley Publishing in 2026.
 
@@ -27,7 +27,7 @@ The book provides practical guidance for software developers who want to integra
 - **Publication Year**: 2026
 - **ISBN**: 9781394373130
 
-## 🚀 What's Inside
+## What's Inside
 
 This repository contains **complete code examples from every chapter** and is organized by chapter with working examples of:
 
@@ -36,14 +36,14 @@ This repository contains **complete code examples from every chapter** and is or
 - **Chat Applications** - Full-stack chat implementations with streaming
 - **Content Generation** - Structured output and template-based generation
 - **Code Optimization** - AI-assisted coding environments and optimization techniques
-- **Production Tools** - PACE (Prompt-Augmented Coding Environment) for enterprise development
+- **Production Tools** - SPOT (Structured Prompt Output Toolkit) and PACE for enterprise AI content generation and development
 - **Vector Search** - Embedding-based search and recommendation systems
 - **RAG Systems** - Retrieval-Augmented Generation implementations
 - **AI Safety & Moderation** - Content filtering and feedback systems
 - **Cost Management** - Usage tracking, quotas, and cost optimization
 - **Advanced Routing** - Multi-modal adapters and intelligent request orchestration
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 ├── chapter-02/          # RAG (Retrieval-Augmented Generation) concepts
@@ -59,6 +59,8 @@ This repository contains **complete code examples from every chapter** and is or
 │   ├── chat-client-react-*/    # React chat clients
 │   └── simple-chat-server-*/   # Node.js chat servers
 ├── chapter-09/          # Production AI tools
+│   ├── spot-toolkit/   # SPOT Node.js implementation
+│   └── spot-python/    # SPOT Python implementation
 ├── chapter-10/          # AI-assisted coding
 │   └── pace/            # Prompt-Augmented Coding Environment
 ├── chapter-11/          # Vector search and recommendations
@@ -70,7 +72,7 @@ This repository contains **complete code examples from every chapter** and is or
 └── chapter-14/          # AI routing, orchestration and multi-modal adapters
 ```
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Languages**: Python, JavaScript/Node.js, TypeScript
 - **Frameworks**: Flask, Express.js, React, Vite
@@ -78,7 +80,19 @@ This repository contains **complete code examples from every chapter** and is or
 - **Databases**: Vector databases, JSON storage
 - **Tools**: CodeMirror, various AI SDKs
 
-## 🎯 Featured Projects
+## Featured Projects
+
+### SPOT (Structured Prompt Output Toolkit)
+
+_Chapter 9_
+
+A production-ready content generation system available in both Node.js and Python implementations, featuring:
+
+- Multi-provider AI support with automatic failover
+- Brand voice enforcement and style governance
+- Golden set testing and evaluation
+- Circuit breakers and health monitoring
+- Template management with versioning
 
 ### PACE (Prompt-Augmented Coding Environment)
 
@@ -135,7 +149,7 @@ _Chapter 11_
 - User profile-driven recommendations
 - Advanced search with the Fuse.js library
 
-## 🚦 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -178,7 +192,7 @@ _Chapter 11_
 
 Each chapter folder contains its own `README.md` with specific setup instructions. Most Python projects include a `requirements.txt` file, and Node.js projects include a `package.json` file for dependency management.
 
-## 📚 Learning Path
+## Learning Path
 
 If you're new to AI integration, we recommend following this order:
 
@@ -187,13 +201,14 @@ If you're new to AI integration, we recommend following this order:
 3. **Chapter 5** - Explore Node.js integration patterns
 4. **Chapter 8** - Build full-stack chat applications
 5. **Chapter 7** - Optimize performance and implement caching
-6. **Chapter 10** - Enhance development workflow with PACE
-7. **Chapter 11** - Implement advanced search and recommendations
-8. **Chapter 12** - Add safety and moderation to your AI systems
-9. **Chapter 13** - Implement cost monitoring and usage optimization
-10. **Chapter 14** - Master advanced routing and multi-modal orchestration
+6. **Chapter 9** - Scale to production with SPOT (Structured Prompt Output Toolkit)
+7. **Chapter 10** - Enhance development workflow with PACE
+8. **Chapter 11** - Implement advanced search and recommendations
+9. **Chapter 12** - Add safety and moderation to your AI systems
+10. **Chapter 13** - Implement cost monitoring and usage optimization
+11. **Chapter 14** - Master advanced routing and multi-modal orchestration
 
-## 🤝 Contributing
+## Contributing
 
 This repository primarily serves as companion code for the book, but we welcome:
 
@@ -204,24 +219,24 @@ This repository primarily serves as companion code for the book, but we welcome:
 
 Please see individual project READMEs for specific contribution guidelines.
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📧 Support
+## Support
 
 - **Book Support**: Contact Wiley Publishing for book-related questions
 - **Code Issues**: Open an issue in this GitHub repository
 - **Author Contact**: [Chris Minnick](https://github.com/chrisminnick)
 
-## 🔗 Additional Resources
+## Additional Resources
 
 - [OpenAI API Documentation](https://platform.openai.com/docs)
 - [Anthropic API Documentation](https://docs.anthropic.com/)
 - [Google AI API Documentation](https://ai.google.dev/)
 - [Wiley Publishing](https://www.wiley.com/)
 
-## ⚖️ Copyright & License
+## Copyright & License
 
 ### Book Copyright
 
@@ -235,11 +250,3 @@ The code examples and demonstrations in this repository are open source and lice
 **The book and its content are protected by copyright.** The code examples are provided for educational purposes to accompany the book and may be used, modified, and distributed under the terms of the MIT License.
 
 ---
-
-<div align="center">
-
-**Happy Coding! 🤖✨**
-
-_Built with ❤️ for developers integrating AI into their applications_
-
-</div>
