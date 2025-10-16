@@ -15,9 +15,9 @@
 
 ## 📖 About This Book
 
-This repository contains all the code examples, demos, and hands-on projects from **"A Developer's Guide to Integrating Generative AI into Applications"** by Chris Minnick, published by Wiley Publishing in 2026.
+This repository contains **all the code examples, demos, and hands-on projects from every chapter** of **"A Developer's Guide to Integrating Generative AI into Applications"** by Chris Minnick, published by Wiley Publishing in 2026.
 
-The book provides practical guidance for software developers who want to integrate AI capabilities into their applications, covering everything from basic API integration to advanced techniques like RAG (Retrieval-Augmented Generation), vector search, and production-ready AI systems.
+The book provides practical guidance for software developers who want to integrate AI capabilities into their applications, covering everything from basic API integration to advanced techniques like RAG (Retrieval-Augmented Generation), vector search, production-ready AI systems, cost optimization, and advanced orchestration patterns.
 
 ### Book Details
 
@@ -29,16 +29,19 @@ The book provides practical guidance for software developers who want to integra
 
 ## 🚀 What's Inside
 
-This repository is organized by chapter and contains working examples of:
+This repository contains **complete code examples from every chapter** and is organized by chapter with working examples of:
 
 - **AI API Integration** - OpenAI, Anthropic, and Google Gemini integrations
 - **Interactive Games** - 20 Questions, Choose Your Adventure, and Hangman powered by AI
 - **Chat Applications** - Full-stack chat implementations with streaming
 - **Content Generation** - Structured output and template-based generation
 - **Code Optimization** - AI-assisted coding environments and optimization techniques
-- **Production Tools** - SPOT (Structured Prompt Output Toolkit) for enterprise AI content
+- **Production Tools** - PACE (Prompt-Augmented Coding Environment) for enterprise development
 - **Vector Search** - Embedding-based search and recommendation systems
 - **RAG Systems** - Retrieval-Augmented Generation implementations
+- **AI Safety & Moderation** - Content filtering and feedback systems
+- **Cost Management** - Usage tracking, quotas, and cost optimization
+- **Advanced Routing** - Multi-modal adapters and intelligent request orchestration
 
 ## 📁 Repository Structure
 
@@ -56,13 +59,15 @@ This repository is organized by chapter and contains working examples of:
 │   ├── chat-client-react-*/    # React chat clients
 │   └── simple-chat-server-*/   # Node.js chat servers
 ├── chapter-09/          # Production AI tools
-│   └── spot-toolkit/    # Enterprise content generation system
 ├── chapter-10/          # AI-assisted coding
 │   └── pace/            # Prompt-Augmented Coding Environment
-└── chapter-11/          # Vector search and recommendations
-    ├── vector-search-demo/     # Embedding-based search
-    ├── recommender-demo/       # AI recommendation system
-    └── fuse/                   # Advanced search implementation
+├── chapter-11/          # Vector search and recommendations
+│   ├── vector-search-demo/     # Embedding-based search
+│   ├── recommender-demo/       # AI recommendation system
+│   └── fuse/                   # Advanced search implementation
+├── chapter-12/          # AI safety, moderation and feedback systems
+├── chapter-13/          # Cost optimization, usage tracking and quotas
+└── chapter-14/          # AI routing, orchestration and multi-modal adapters
 ```
 
 ## 🛠️ Technologies Used
@@ -75,23 +80,33 @@ This repository is organized by chapter and contains working examples of:
 
 ## 🎯 Featured Projects
 
-### SPOT (Structured Prompt Output Toolkit)
-
-_Chapter 9_
-
-A production-ready content generation system featuring:
-
-- Multi-provider AI support with automatic failover
-- Brand voice enforcement and style governance
-- Golden set testing and evaluation
-- Circuit breakers and health monitoring
-- Template management with versioning
-
 ### PACE (Prompt-Augmented Coding Environment)
 
 _Chapter 10_
 
 An AI-enhanced code editor that combines CodeMirror with customizable AI prompt templates for developer productivity.
+
+### AI Safety & Moderation Systems
+
+_Chapter 12_
+
+Production-ready implementations featuring:
+
+- Content moderation and filtering
+- Feedback collection and analysis systems
+- Safe AI interaction patterns
+- Real-time monitoring and alerting
+
+### Cost Optimization Suite
+
+_Chapter 13_
+
+Enterprise-grade tools for AI cost management:
+
+- Real-time usage tracking and analytics
+- Token counting and cost estimation
+- Quota enforcement and rate limiting
+- Usage summarization and reporting
 
 ### Interactive AI Games
 
@@ -172,9 +187,11 @@ If you're new to AI integration, we recommend following this order:
 3. **Chapter 5** - Explore Node.js integration patterns
 4. **Chapter 8** - Build full-stack chat applications
 5. **Chapter 7** - Optimize performance and implement caching
-6. **Chapter 9** - Scale to production with SPOT
-7. **Chapter 10** - Enhance development workflow with PACE
-8. **Chapter 11** - Implement advanced search and recommendations
+6. **Chapter 10** - Enhance development workflow with PACE
+7. **Chapter 11** - Implement advanced search and recommendations
+8. **Chapter 12** - Add safety and moderation to your AI systems
+9. **Chapter 13** - Implement cost monitoring and usage optimization
+10. **Chapter 14** - Master advanced routing and multi-modal orchestration
 
 ## 🤝 Contributing
 

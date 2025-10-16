@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SPOT Toolkit - Web Interface</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        color: white;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .card h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #4a5568;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .card p {
+        color: #718096;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .button {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+      }
+
+      .health-status {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .health-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .health-healthy {
+        background: #c6f6d5;
+        color: #22543d;
+      }
+
+      .health-unhealthy {
+        background: #fed7d7;
+        color: #742a2a;
+      }
+
+      .health-loading {
+        background: #fef5e7;
+        color: #975a16;
+      }
+
+      .emoji {
+        font-size: 1.5rem;
+      }
+
+      .footer {
+        text-align: center;
+        color: white;
+        opacity: 0.8;
+        margin-top: 3rem;
+      }
+
+      .api-endpoint {
+        background: #f7fafc;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+        font-family: 'Courier New', monospace;
+        border-left: 4px solid #667eea;
+      }
+
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .health-details {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f7fafc;
+        border-radius: 8px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🎯 SPOT Toolkit</h1>
+        <p>Structured Prompt Output Toolkit - Web Interface</p>
+      </div>
+
+      <div class="health-status">
+        <h2>System Health</h2>
+        <div id="health-indicator" class="health-indicator health-loading">
+          <div class="loading"></div>
+          Checking system health...
+        </div>
+        <div id="health-details" class="health-details hidden"></div>
+        <button class="button" onclick="checkHealth()" style="margin-top: 1rem">
+          🔄 Refresh Health Check
+        </button>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h2><span class="emoji">📚</span> API Documentation</h2>
+          <p>
+            Interactive API documentation powered by Swagger UI. Explore all
+            available endpoints, test requests, and view response schemas.
+          </p>
+          <a href="/docs" class="button">View API Docs</a>
+        </div>
+
+        <div class="card">
+          <h2><span class="emoji">🚀</span> Content Generation</h2>
+          <p>
+            Generate content using AI-powered templates. Create scaffolds,
+            expand sections, rewrite content, and more.
+          </p>
+          <div class="api-endpoint">POST /api/v1/scaffold</div>
+          <div class="api-endpoint">POST /api/v1/expand</div>
+          <div class="api-endpoint">POST /api/v1/rewrite</div>
+        </div>
+
+        <div class="card">
+          <h2><span class="emoji">🔧</span> Template Management</h2>
+          <p>
+            Manage and validate your prompt templates. View available templates
+            and check their configuration.
+          </p>
+          <div class="api-endpoint">GET /api/v1/templates</div>
+          <div class="api-endpoint">POST /api/v1/templates/validate</div>
+        </div>
+
+        <div class="card">
+          <h2><span class="emoji">🤖</span> AI Providers</h2>
+          <p>
+            Monitor AI provider status and availability. Check health and switch
+            between OpenAI, Anthropic, and Gemini.
+          </p>
+          <div class="api-endpoint">GET /api/v1/providers</div>
+          <div class="api-endpoint">GET /api/v1/providers/{id}/health</div>
+        </div>
+
+        <div class="card">
+          <h2><span class="emoji">📊</span> Evaluation & Testing</h2>
+          <p>
+            Run evaluations on your content generation pipelines. Test quality,
+            performance, and compliance.
+          </p>
+          <div class="api-endpoint">POST /api/v1/evaluate</div>
+          <div class="api-endpoint">POST /api/v1/style/check</div>
+        </div>
+
+        <div class="card">
+          <h2><span class="emoji">📁</span> File Management</h2>
+          <p>
+            Upload and manage content files. List available files and upload new
+            content for processing.
+          </p>
+          <div class="api-endpoint">GET /api/v1/files</div>
+          <div class="api-endpoint">POST /api/v1/files/upload</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>SPOT Toolkit v0.4.0 - Created by Chris Minnick</p>
+        <p>
+          🐙
+          <a
+            href="https://github.com/chrisminnick/spot-toolkit"
+            style="color: white"
+            >GitHub Repository</a
+          >
+          | 📚 <a href="/docs" style="color: white">Interactive API Docs</a>
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Check health on page load
+      document.addEventListener('DOMContentLoaded', checkHealth);
+
+      async function checkHealth() {
+        const indicator = document.getElementById('health-indicator');
+        const details = document.getElementById('health-details');
+
+        // Show loading state
+        indicator.className = 'health-indicator health-loading';
+        indicator.innerHTML =
+          '<div class="loading"></div> Checking system health...';
+        details.classList.add('hidden');
+
+        try {
+          const response = await fetch('/health');
+          const health = await response.json();
+
+          if (health.status === 'healthy') {
+            indicator.className = 'health-indicator health-healthy';
+            indicator.innerHTML = '✅ System Healthy';
+          } else {
+            indicator.className = 'health-indicator health-unhealthy';
+            indicator.innerHTML = '❌ System Unhealthy';
+          }
+
+          // Show detailed health information
+          details.textContent = JSON.stringify(health, null, 2);
+          details.classList.remove('hidden');
+        } catch (error) {
+          indicator.className = 'health-indicator health-unhealthy';
+          indicator.innerHTML = '❌ Health Check Failed';
+          details.textContent = `Error: ${error.message}`;
+          details.classList.remove('hidden');
+        }
+      }
+
+      // Auto-refresh health every 30 seconds
+      setInterval(checkHealth, 30000);
+    </script>
+  </body>
+</html>

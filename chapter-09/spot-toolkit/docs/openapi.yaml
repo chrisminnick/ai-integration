@@ -1,0 +1,565 @@
+openapi: 3.1.0
+info:
+  title: SPOT Toolkit API
+  description: |
+    RESTful API for the SPOT (Structured Prompt Output Toolkit) content generation system.
+
+    SPOT is an AI-powered content generation tool focused on reliability, monitoring, and evaluation capabilities.
+  version: '0.4.0'
+  contact:
+    name: Chris Minnick
+    url: https://github.com/chrisminnick/spot-toolkit
+  license:
+    name: MIT
+    url: https://github.com/chrisminnick/spot-toolkit/blob/main/LICENSE
+
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+
+tags:
+  - name: health
+    description: System health and status
+  - name: templates
+    description: Template management
+  - name: providers
+    description: AI provider management
+  - name: generation
+    description: Content generation endpoints
+  - name: evaluation
+    description: Content evaluation and testing
+  - name: style
+    description: Style compliance checking
+  - name: files
+    description: File management
+
+paths:
+  /health:
+    get:
+      tags: [health]
+      summary: System health check
+      description: Check the overall health status of the SPOT system
+      responses:
+        '200':
+          description: System is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '503':
+          description: System is unhealthy
+
+  /api/v1/info:
+    get:
+      tags: [health]
+      summary: API information
+      description: Get API version, features, and endpoint information
+      responses:
+        '200':
+          description: API information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoResponse'
+
+  /api/v1/templates:
+    get:
+      tags: [templates]
+      summary: List templates
+      description: Get all available prompt templates
+      responses:
+        '200':
+          description: List of templates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateListResponse'
+
+  /api/v1/templates/{templateId}:
+    get:
+      tags: [templates]
+      summary: Get template
+      description: Get details for a specific template
+      parameters:
+        - name: templateId
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 'draft_scaffold@1.0.0'
+      responses:
+        '200':
+          description: Template details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResponse'
+        '404':
+          description: Template not found
+
+  /api/v1/templates/validate:
+    post:
+      tags: [templates]
+      summary: Validate templates
+      description: Validate all prompt templates
+      responses:
+        '200':
+          description: All templates valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+        '400':
+          description: Some templates invalid
+
+  /api/v1/providers:
+    get:
+      tags: [providers]
+      summary: List providers
+      description: Get all available AI providers
+      responses:
+        '200':
+          description: List of providers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderListResponse'
+
+  /api/v1/scaffold:
+    post:
+      tags: [generation]
+      summary: Create content scaffold
+      description: Generate a content outline from a brief
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScaffoldRequest'
+      responses:
+        '200':
+          description: Scaffold created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScaffoldResponse'
+        '400':
+          description: Invalid request parameters
+
+  /api/v1/expand:
+    post:
+      tags: [generation]
+      summary: Expand content section
+      description: Expand a content section into full prose
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpandRequest'
+      responses:
+        '200':
+          description: Section expanded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpandResponse'
+
+  /api/v1/rewrite:
+    post:
+      tags: [generation]
+      summary: Rewrite content
+      description: Rewrite content for different audiences and requirements
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RewriteRequest'
+      responses:
+        '200':
+          description: Content rewritten successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewriteResponse'
+
+  /api/v1/summarize:
+    post:
+      tags: [generation]
+      summary: Summarize content
+      description: Create summaries with citations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SummarizeRequest'
+      responses:
+        '200':
+          description: Content summarized successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SummarizeResponse'
+
+  /api/v1/repurpose:
+    post:
+      tags: [generation]
+      summary: Repurpose content
+      description: Adapt content for multiple channels
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepurposeRequest'
+      responses:
+        '200':
+          description: Content repurposed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepurposeResponse'
+
+  /api/v1/style/check:
+    post:
+      tags: [style]
+      summary: Check style compliance
+      description: Validate content against style pack rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StyleCheckRequest'
+      responses:
+        '200':
+          description: Style check completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StyleCheckResponse'
+
+  /api/v1/style/rules:
+    get:
+      tags: [style]
+      summary: Get style rules
+      description: Get current style pack configuration
+      responses:
+        '200':
+          description: Style rules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StyleRulesResponse'
+
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [healthy, unhealthy]
+        timestamp:
+          type: string
+          format: date-time
+        checks:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              status:
+                type: string
+              duration:
+                type: number
+              details:
+                type: object
+
+    InfoResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+        description:
+          type: string
+        environment:
+          type: string
+        provider:
+          type: string
+        features:
+          type: array
+          items:
+            type: string
+        endpoints:
+          type: object
+
+    TemplateListResponse:
+      type: object
+      properties:
+        templates:
+          type: array
+          items:
+            type: string
+
+    TemplateResponse:
+      type: object
+      properties:
+        template:
+          type: object
+          properties:
+            id:
+              type: string
+            version:
+              type: string
+            description:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: string
+
+    ValidationResponse:
+      type: object
+      properties:
+        validation:
+          type: array
+          items:
+            type: object
+            properties:
+              templateId:
+                type: string
+              status:
+                type: string
+                enum: [valid, invalid]
+        summary:
+          type: object
+          properties:
+            total:
+              type: integer
+            valid:
+              type: integer
+            invalid:
+              type: integer
+
+    ProviderListResponse:
+      type: object
+      properties:
+        providers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              models:
+                type: array
+                items:
+                  type: string
+              available:
+                type: boolean
+
+    ScaffoldRequest:
+      type: object
+      required: [asset_type, topic, audience, tone]
+      properties:
+        asset_type:
+          type: string
+          example: 'blog post'
+        topic:
+          type: string
+          example: 'AI applications'
+        audience:
+          type: string
+          example: 'developers'
+        tone:
+          type: string
+          example: 'technical'
+        word_count:
+          type: integer
+          default: 600
+
+    ScaffoldResponse:
+      type: object
+      properties:
+        scaffold:
+          type: object
+          properties:
+            title:
+              type: string
+            sections:
+              type: array
+              items:
+                type: object
+                properties:
+                  heading:
+                    type: string
+                  bullets:
+                    type: array
+                    items:
+                      type: string
+
+    ExpandRequest:
+      type: object
+      required: [section_json]
+      properties:
+        section_json:
+          type: string
+          description: JSON string of section to expand
+
+    ExpandResponse:
+      type: object
+      properties:
+        expanded:
+          type: object
+          properties:
+            heading:
+              type: string
+            content:
+              type: string
+            word_count:
+              type: integer
+
+    RewriteRequest:
+      type: object
+      required: [text, audience, tone]
+      properties:
+        text:
+          type: string
+        audience:
+          type: string
+        tone:
+          type: string
+        grade_level:
+          type: integer
+        words:
+          type: integer
+        locale:
+          type: string
+          default: 'en-US'
+
+    RewriteResponse:
+      type: object
+      properties:
+        rewritten:
+          type: object
+          properties:
+            text:
+              type: string
+            changes:
+              type: array
+              items:
+                type: string
+            word_count:
+              type: integer
+
+    SummarizeRequest:
+      type: object
+      required: [content]
+      properties:
+        content:
+          type: string
+        mode:
+          type: string
+          default: 'standard'
+
+    SummarizeResponse:
+      type: object
+      properties:
+        summary:
+          type: object
+          properties:
+            executive_summary:
+              type: string
+            key_points:
+              type: array
+              items:
+                type: string
+            word_count:
+              type: integer
+
+    RepurposeRequest:
+      type: object
+      required: [content]
+      properties:
+        content:
+          type: string
+        channels:
+          type: array
+          items:
+            type: string
+          default: ['email', 'social', 'blog']
+
+    RepurposeResponse:
+      type: object
+      properties:
+        repurposed:
+          type: object
+          additionalProperties: true
+
+    StyleCheckRequest:
+      type: object
+      required: [content]
+      properties:
+        content:
+          type: string
+
+    StyleCheckResponse:
+      type: object
+      properties:
+        violations:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              term:
+                type: string
+              message:
+                type: string
+        compliant:
+          type: boolean
+        stylepack:
+          type: object
+
+    StyleRulesResponse:
+      type: object
+      properties:
+        stylepack:
+          type: object
+          properties:
+            brand_voice:
+              type: string
+            reading_level:
+              type: string
+            must_use:
+              type: array
+              items:
+                type: string
+            must_avoid:
+              type: array
+              items:
+                type: string
+            terminology:
+              type: object
+            formatting:
+              type: object
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        path:
+          type: string

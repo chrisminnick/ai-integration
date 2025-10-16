@@ -1,0 +1,18 @@
+{
+  "asset_type": "email",
+  "topic": "Weekly product update",
+  "audience": "customers",
+  "tone": "friendly",
+  "word_count": 300,
+  "metadata": {
+    "difficulty": "easy",
+    "category": "provider_comparison",
+    "test_purpose": "Simple standardized test for basic provider comparison",
+    "comparison_metrics": [
+      "tone_consistency",
+      "length_accuracy",
+      "structure_quality",
+      "response_time"
+    ]
+  }
+}

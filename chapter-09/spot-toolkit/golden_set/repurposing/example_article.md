@@ -1,0 +1,3 @@
+# Twelve Ways to Reduce Churn
+
+Customer retention hinges on predictable value and clear communication. In this article we explore twelve tactics...

@@ -1,0 +1,16 @@
+{
+  "asset_type": "case study",
+  "topic": "How users improved their workflows",
+  "audience": "business managers",
+  "tone": "professional",
+  "word_count": 800,
+  "metadata": {
+    "difficulty": "medium",
+    "category": "terminology_test",
+    "test_purpose": "Test terminology replacement (user -> customer)",
+    "expected_terminology_fixes": {
+      "user": "customer"
+    },
+    "contains_terminology_violations": true
+  }
+}

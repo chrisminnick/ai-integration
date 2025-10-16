@@ -1,0 +1,54 @@
+{
+  "id": "draft_scaffold",
+  "version": "1.0.0",
+  "purpose": "Brief \u2192 Scaffold (JSON)",
+  "inputs": [
+    "asset_type",
+    "topic",
+    "audience",
+    "tone",
+    "word_count"
+  ],
+  "system": "You are a senior editor. Produce a scaffold only.",
+  "user": "Create a scaffold for a {asset_type} about {topic}. Audience: {audience}. Tone: {tone}. Constraints: Total \u2248 {word_count} words, max 5 sections. Respond as JSON with keys: title, sections[] (each section has heading, bullets[3-5]).",
+  "guardrails": [
+    "No claims, numbers, or sources\u2014bullets are ideas only."
+  ],
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": "string"
+      },
+      "sections": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "heading": {
+              "type": "string"
+            },
+            "bullets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 3,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "heading",
+            "bullets"
+          ]
+        },
+        "minItems": 1,
+        "maxItems": 5
+      }
+    },
+    "required": [
+      "title",
+      "sections"
+    ]
+  }
+}
