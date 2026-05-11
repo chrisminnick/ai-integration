@@ -1,0 +1,17 @@
+{
+  "name": "lab5-rag-solution",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Lab 5 solution - a small RAG pipeline over a product catalog.",
+  "scripts": {
+    "index": "node index.js",
+    "search": "node search.js",
+    "rag": "node rag.js",
+    "no-rag": "node no_rag.js",
+    "hybrid": "node rag_hybrid.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "openai": "^4.53.2"
+  }
+}

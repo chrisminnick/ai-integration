@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp \"/Users/chrisminnick/code/src/github.com/chrisminnick/ai-integration/Activities/Lab 5 - Building a RAG System/vector-search-demo/.env\" /Users/chrisminnick/code/src/github.com/chrisminnick/ai-integration/solutions/lab5/.env)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(node *)"
+    ]
+  }
+}

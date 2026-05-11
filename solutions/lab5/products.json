@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Noise-Canceling Headphones",
+    "description": "Over-ear headphones with long battery life and deep bass.",
+    "category": "audio"
+  },
+  {
+    "id": 2,
+    "name": "Ergonomic Office Chair",
+    "description": "Mesh back support with adjustable height and lumbar cushion.",
+    "category": "furniture"
+  },
+  {
+    "id": 3,
+    "name": "Stainless Steel Water Bottle",
+    "description": "Insulated bottle keeps drinks cold for 24 hours.",
+    "category": "outdoors"
+  },
+  {
+    "id": 4,
+    "name": "Portable Bluetooth Speaker",
+    "description": "Compact design with powerful sound, ideal for travel and the beach.",
+    "category": "audio"
+  },
+  {
+    "id": 5,
+    "name": "Compact Camping Stove",
+    "description": "Lightweight propane stove perfect for backpacking and weekend campouts.",
+    "category": "outdoors"
+  },
+  {
+    "id": 6,
+    "name": "Fly Fishing Rod",
+    "description": "Four-piece graphite fly rod with carrying case, great gift for serious anglers.",
+    "category": "outdoors"
+  }
+]
